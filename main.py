@@ -17,7 +17,9 @@ def main() :
 
 
 		juego.clock.tick(20)
-		juego.pantalla.fill((255,255,255))
+		juego.pantalla.fill(juego.color_fondo)
+
+		juego.tablero.update(juego.pantalla)
 		pygame.display.update()
 
 	pygame.quit()
