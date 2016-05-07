@@ -63,7 +63,7 @@ class Board() :
 		self.squares[fila][columna].piece = piece.Piece(occupation, self.squares[fila][columna].left + 10 , self.squares[fila][columna].top + 10)
 		self.squares[fila][columna].draw_piece(pantalla,self.squares[fila][columna].piece)
 		self.squares[fila][columna].occupation = occupation
-		
+
 	def assign_pieces(self, pantalla) :
 
 	
@@ -79,7 +79,7 @@ class Board() :
 
 						if j % 2 != 0 :
 
-							self.assign_positions(i,j,pantalla,1)
+							self.assign_positions(i,j,pantalla,2)
 						#to none	
 						else :
 							self.assign_positions(i,j,pantalla,0)
@@ -87,7 +87,7 @@ class Board() :
 					else :
 
 						if j % 2 == 0 :
-							self.assign_positions(i,j,pantalla,1)
+							self.assign_positions(i,j,pantalla,2)
 						else :
 							self.assign_positions(i,j,pantalla,0)
 				
@@ -97,7 +97,7 @@ class Board() :
 					if i % 2 == 0 :
 
 						if j % 2 != 0 :
-							self.assign_positions(i,j,pantalla,2)
+							self.assign_positions(i,j,pantalla,1)
 						else :
 
 							self.assign_positions(i,j,pantalla,0)
@@ -105,7 +105,7 @@ class Board() :
 					else :
 
 						if j % 2 == 0 :
-							self.assign_positions(i,j,pantalla,2)
+							self.assign_positions(i,j,pantalla,1)
 
 						else :
 
