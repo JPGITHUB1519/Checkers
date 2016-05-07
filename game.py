@@ -15,8 +15,15 @@ class Game() :
 		self.color_fondo = (250,128,114)
 		self.tablero = board.Board(self.color_blanco, self.color_negro,100,100,65,65)
 		self.cursor1 = cursor.Cursor()
+		self.game_data_structure = [[0,2,0,2,0,2,0,2],
+									[2,0,2,0,2,0,2,0],
+									[0,2,0,2,0,2,0,2],
+									[0,0,0,0,0,0,0,0],
+									[0,0,0,0,0,0,0,0],
+									[1,0,1,0,1,0,1,0],
+									[0,1,0,1,0,1,0,1],
+									[1,0,1,0,1,0,1,0]],
 		#conds
-
 		self.cond_main_game = True
 
 	def main_game(self) :

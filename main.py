@@ -19,9 +19,8 @@ def main() :
 
 			if event.type == pygame.MOUSEBUTTONDOWN :
 
-				if juego.cursor1.colliderect(juego.tablero.squares[0][0]) :
-					
-					print juego.tablero.squares[0][0]
+				if juego.cursor1.colliderect(juego.tablero.squares[0][5]) :
+					pass
 
 		juego.clock.tick(20)
 		
