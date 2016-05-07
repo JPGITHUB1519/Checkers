@@ -30,15 +30,15 @@ def main():
         pantalla.fill(blanco) # pinto la superficie de blanco
 
         x, y = 200,200
-        width, height = 100, 100
+        width, height = 65, 65
         cuad = pygame.Rect(x,y,width, height)
         cuad2 = pygame.Rect(x +200,y+200,width, height)
         pieza = pygame.image.load("images/black_piece.png")
 
         pygame.draw.rect(pantalla, (255,0,0), cuad)
         pygame.draw.rect(pantalla, (255,0,0), cuad2)
-        pantalla.blit(pieza,(cuad.left +15,cuad.left + 15))
-        pantalla.blit(pieza,(cuad2.left +15,cuad2.left + 15))
+        pantalla.blit(pieza,(cuad.left, cuad.top))
+        pantalla.blit(pieza,(cuad2.left, cuad2.top))
         pygame.display.update() #actualizo el display
         
     pygame.quit()

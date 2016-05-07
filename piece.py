@@ -6,13 +6,14 @@ class Piece(pygame.sprite.Sprite) :
 
 		imagen_pieza_negra = pygame.image.load("images/black_piece.png")
 		imagen_pieza_roja = pygame.image.load("images/red_piece.png")
+		imagen_pieza_verde = pygame.image.load("images/green_piece.png")
 		imagen_transparente = pygame.image.load("images/fondo_transparente.png")
 		self.piece_type = piece_type
 
 		if self.piece_type == 0 :
 			self.player1 = True
 			self.player2 = False
-			self.image = imagen_transparente
+			self.image =  imagen_transparente
 
 		if self.piece_type == 1 :
 			self.player1 = True

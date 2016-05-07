@@ -58,34 +58,59 @@ class Board() :
 
 						pygame.draw.rect(pantalla, self.color1, self.squares[i][j])
 
+	def assign_positions(self,fila,columna,pantalla, occupation) :
+
+		self.squares[fila][columna].piece = piece.Piece(occupation, self.squares[fila][columna].left + 10 , self.squares[fila][columna].top + 10)
+		self.squares[fila][columna].draw_piece(pantalla,self.squares[fila][columna].piece)
+		self.squares[fila][columna].occupation = occupation
+		
 	def assign_pieces(self, pantalla) :
 
-		"""
-		for i in range(0,3) :
+	
+		for i in range(0,8) :
 
 			for j in range(0,8) :
 
-				if i % 2 == 0 :
+				# assign pieces to player 1
 
-					if j % 2 == 0 :
-						self.squares[i][j].piece = piece.Piece(1, self.squares[i][j].left + 15, self.squares[i][j].left + 15)
-						self.squares[i][j].draw_piece(pantalla,self.squares[i][j].piece)
+				if i in range(0,3) :
+
+					if i % 2 == 0 :
+
+						if j % 2 != 0 :
+
+							self.assign_positions(i,j,pantalla,1)
+						#to none	
+						else :
+							self.assign_positions(i,j,pantalla,0)
+
+					else :
+
+						if j % 2 == 0 :
+							self.assign_positions(i,j,pantalla,1)
+						else :
+							self.assign_positions(i,j,pantalla,0)
+				
+				# player 2
+				elif i in range(5,8) :
+
+					if i % 2 == 0 :
+
+						if j % 2 != 0 :
+							self.assign_positions(i,j,pantalla,2)
+						else :
+
+							self.assign_positions(i,j,pantalla,0)
+
+					else :
+
+						if j % 2 == 0 :
+							self.assign_positions(i,j,pantalla,2)
+
+						else :
+
+							self.assign_positions(i,j,pantalla,0)
 				else :
 
-					if j % 2 != 0 :
-
-						self.squares[i][j].piece = piece.Piece(1, self.squares[i][j].left + 15, self.squares[i][j].left + 15)
-						self.squares[i][j].draw_piece(pantalla,self.squares[i][j].piece)
-				
-		"""
-		i = 0
-		j= 0
-		self.squares[i][j].piece = piece.Piece(1, self.squares[i][j].left + 15, self.squares[i][j].left + 15)
-		self.squares[i][j].draw_piece(pantalla,self.squares[i][j].piece)
-		j = j + 1
-		self.squares[i][j].piece = piece.Piece(1, self.squares[i][j].left + 15, self.squares[i][j].left + 15)
-		self.squares[i][j].draw_piece(pantalla,self.squares[i][j].piece)
-
-
-		
+					self.assign_positions(i,j,pantalla,0)
 
