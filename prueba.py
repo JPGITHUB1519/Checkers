@@ -7,7 +7,7 @@ def main():
     pygame.init() # inicializo el modulo
     
     # fijo las dimensiones de la pantalla a 300,300 y creo una superficie que va ser la principal
-    pantalla=pygame.display.set_mode((300,300))
+    pantalla=pygame.display.set_mode((600,600))
     
     pygame.display.set_caption("Mi Ventana") # Titulo de la Ventana
     #creo un reloj para controlar los fps
@@ -29,14 +29,16 @@ def main():
         reloj1.tick(20)#operacion para que todo corra a 20fps
         pantalla.fill(blanco) # pinto la superficie de blanco
 
-        x, y = 0,0
+        x, y = 200,200
         width, height = 100, 100
         cuad = pygame.Rect(x,y,width, height)
+        cuad2 = pygame.Rect(x +200,y+200,width, height)
         pieza = pygame.image.load("images/black_piece.png")
 
         pygame.draw.rect(pantalla, (255,0,0), cuad)
-        pantalla.blit(pieza,(width/6,height/6))
- 
+        pygame.draw.rect(pantalla, (255,0,0), cuad2)
+        pantalla.blit(pieza,(cuad.left +15,cuad.left + 15))
+        pantalla.blit(pieza,(cuad2.left +15,cuad2.left + 15))
         pygame.display.update() #actualizo el display
         
     pygame.quit()

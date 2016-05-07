@@ -1,5 +1,6 @@
 import pygame
 import board
+import cursor
 
 class Game() :
 
@@ -13,7 +14,7 @@ class Game() :
 		self.color_blanco = (255,255,255)
 		self.color_fondo = (250,128,114)
 		self.tablero = board.Board(self.color_blanco, self.color_negro,100,100,65,65)
-
+		self.cursor1 = cursor.Cursor()
 		#conds
 
 		self.cond_main_game = True
@@ -23,6 +24,10 @@ class Game() :
 		self.pantalla.fill(self.color_fondo)
 
 		self.tablero.update(self.pantalla)
+
+		self.tablero.assign_pieces(self.pantalla)
+
+		self.cursor1.update(self.pantalla)
 
 
 

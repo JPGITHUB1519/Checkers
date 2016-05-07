@@ -17,6 +17,12 @@ def main() :
 
 				juego.salir = True
 
+			if event.type == pygame.MOUSEBUTTONDOWN :
+
+				if juego.cursor1.colliderect(juego.tablero.squares[0][1]) :
+
+					pass
+
 		juego.clock.tick(20)
 		
 		if juego.cond_main_game == True : 

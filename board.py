@@ -1,5 +1,6 @@
 import pygame
 import square
+import piece
 
 class Board() :
 
@@ -57,10 +58,33 @@ class Board() :
 
 						pygame.draw.rect(pantalla, self.color1, self.squares[i][j])
 
+	def assign_pieces(self, pantalla) :
 
+		"""
+		for i in range(0,3) :
 
+			for j in range(0,8) :
 
+				if i % 2 == 0 :
 
+					if j % 2 == 0 :
+						self.squares[i][j].piece = piece.Piece(1, self.squares[i][j].left + 15, self.squares[i][j].left + 15)
+						self.squares[i][j].draw_piece(pantalla,self.squares[i][j].piece)
+				else :
+
+					if j % 2 != 0 :
+
+						self.squares[i][j].piece = piece.Piece(1, self.squares[i][j].left + 15, self.squares[i][j].left + 15)
+						self.squares[i][j].draw_piece(pantalla,self.squares[i][j].piece)
+				
+		"""
+		i = 0
+		j= 0
+		self.squares[i][j].piece = piece.Piece(1, self.squares[i][j].left + 15, self.squares[i][j].left + 15)
+		self.squares[i][j].draw_piece(pantalla,self.squares[i][j].piece)
+		j = j + 1
+		self.squares[i][j].piece = piece.Piece(1, self.squares[i][j].left + 15, self.squares[i][j].left + 15)
+		self.squares[i][j].draw_piece(pantalla,self.squares[i][j].piece)
 
 
 		

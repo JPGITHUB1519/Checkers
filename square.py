@@ -6,11 +6,11 @@ class Square(pygame.Rect) :
 
 		pygame.Rect.__init__(self,x,y,width, height)
 		self.piece = None
-
+		self.occupation = 0
 
 	def draw_piece(self, pantalla, piece) :
 
 		if self.piece != None :
 
-			pantalla.blit(piece, self.width/6, self.height/6)
+			pantalla.blit(piece.image, piece.rect)
 
