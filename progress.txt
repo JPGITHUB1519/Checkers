@@ -1,0 +1,31 @@
+damas 
+
+tablero = 8 x 8 
+piezas = 12 por jugador
+
+data_structure = [[],
+				  [],
+				  [],
+				  [],
+				  [],
+				  [],
+				  [],
+				  []]
+
+[EMPTY, WHITE_PIECE, BLACK_PIECE, WHITE_PIECE_PROMOTED, BLACK_PIECE_PROMOTED]
+
+0 = EMPTY
+1 = KING PLAYER1 PIECE
+2 = KING PLAYER2 PIECE
+11 = PLAYER1 PIECE
+22 = PLAYER2 PIECE
+EMP =
+
+data_structure = [[],
+				  [],
+				  [],
+				  [],
+				  [],
+				  [],
+				  [],
+				  []]

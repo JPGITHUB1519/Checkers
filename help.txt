@@ -1,0 +1,3 @@
+http://gamedev.stackexchange.com/questions/16135/how-to-implement-a-i-for-checkers-draughts
+
+http://stackoverflow.com/questions/30698353/developing-a-checkers-draughts-engine-how-to-begin

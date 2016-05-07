@@ -1,5 +1,7 @@
 import pygame
 import game
+import piece
+import board
 
 pygame.init()
 
@@ -15,11 +17,11 @@ def main() :
 
 				juego.salir = True
 
-
 		juego.clock.tick(20)
-		juego.pantalla.fill(juego.color_fondo)
+		
+		if juego.cond_main_game == True : 
+			juego.main_game()
 
-		juego.tablero.update(juego.pantalla)
 		pygame.display.update()
 
 	pygame.quit()

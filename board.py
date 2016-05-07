@@ -1,5 +1,5 @@
 import pygame
-
+import square
 
 class Board() :
 
@@ -19,9 +19,9 @@ class Board() :
 
 			for j in range(0,8) :
 
-				self.squares[i].append(pygame.Rect(self.xpos, self.ypos, width, height))
+				self.squares[i].append(square.Square(self.xpos, self.ypos, width, height))
 				self.xpos += 65
-			self.xpos = 0
+			self.xpos = x
 			self.ypos += 65
 
 		"""
