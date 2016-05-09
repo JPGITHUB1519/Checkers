@@ -35,7 +35,7 @@ def main() :
 
 							if juego.seleccionado == True :
 								
-								if juego.partida.check_movement(juego.tablero.squares[juego.factual][juego.cactual].piece,juego.factual, juego.cactual,i,j) == True :
+								if juego.partida.check_movement(juego.tablero.squares,juego.factual, juego.cactual,i,j) == True :
 									juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
 									print "exito"
 								juego.seleccionado = False

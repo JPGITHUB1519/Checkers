@@ -23,18 +23,23 @@ class Partida() :
 		squares[f_prox][c_prox].piece.piece_type = squares[f_actual][c_actual].piece.piece_type
 		squares[f_actual][c_actual].piece.piece_type = 0
 
-	def check_movement(self,piece, f_actual, c_actual, f_prox, c_prox) :
+	def check_movement(self,squares, f_actual, c_actual, f_prox, c_prox) :
 
-		if self.check_ispiece(piece) :
+		piece_actual = squares[f_actual][c_actual].piece
+		piece_prox = squares[f_prox][c_prox].piece
+
+		if self.check_ispiece(piece_actual) :
+
+			
 
 			# check length of the move
-			if self.check_piece_type(piece) == 1 :
+			if self.check_piece_type(piece_actual) == 1 :
 				
 				if not(f_prox == f_actual - 1 and c_prox in self.check_diagonal(f_actual, c_actual)) :
 
 					return False
 
-			if self.check_piece_type(piece) == 2 :
+			if self.check_piece_type(piece_actual) == 2 :
 
 				if not(f_prox == f_actual + 1 and c_prox in self.check_diagonal(f_actual, c_actual)) :
 
