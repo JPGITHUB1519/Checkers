@@ -27,6 +27,7 @@ class Partida() :
 
 		if self.check_ispiece(piece) :
 
+			# check length of the move
 			if self.check_piece_type(piece) == 1 :
 				
 				if not(f_prox == f_actual - 1 and c_prox in self.check_diagonal(f_actual, c_actual)) :
@@ -41,6 +42,8 @@ class Partida() :
 		else :
 
 			return False
+
+		print 
 
 		return True
 

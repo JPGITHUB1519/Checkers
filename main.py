@@ -9,7 +9,6 @@ def main() :
 
 	juego = game.Game()
 
-
 	while(juego.salir != True) :
 
 		for event in pygame.event.get() :
@@ -40,6 +39,7 @@ def main() :
 									juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
 									print "exito"
 								juego.seleccionado = False
+								print juego.tablero.get_string_data_structure()
 								#print str(juego.factual) + " " + str(juego.cactual)
 								#print str(i) + " " + str(j)
 								#juego.tablero.squares[juego.factual][juego.cactual].piece.image = juego.tablero.squares[juego.factual][juego.cactual].piece.imagen_transparente

@@ -119,7 +119,19 @@ class Board() :
 
 				self.squares[fila][columna].draw_piece(pantalla,self.squares[fila][columna].piece)
 
+	def get_string_data_structure(self) :
 
+		string = ""
+
+		for i in range(0,8) :
+
+			for j in range(0,8) :
+
+				string += " " + str(self.squares[i][j].piece.piece_type)
+
+			string += "\n"
+
+		return string
 
 
 		
