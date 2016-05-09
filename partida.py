@@ -140,6 +140,55 @@ class Partida() :
 
 		return pos
 
+	def check_all_pieces_movement(self, squares) :
+
+		data_structure = {}
+		element_name = ""
+		aux_cant_eat = []
+
+		for f in range(0,8) :
+ 
+			for c in range(0,8) :
+
+				aux_cant_eat = self.check_can_eat(squares, f, c)
+				element_name = str(f) + str(c)
+				data_structure[element_name] = []
+
+				if len(aux_cant_eat) > 0 :
+
+					data_structure[element_name].append(True)
+					data_structure[element_name].append(aux_cant_eat)
+					continue
+				if squares[f][c].piece.piece_type  == 1:
+
+					# check right diagonal
+					data_structure[element_name].append(False)
+					if c != 7  :
+						if self.check_movement(squares, f, c, f - 1, c + 1) == True :
+
+							data_structure[element_name].append([f - 1, c + 1])
+					
+					if c != 0 :
+						if self.check_movement(squares, f,c, f - 1, c - 1) == True :
+
+							data_structure[element_name].append([f - 1, c - 1])
+
+				if squares[f][c].piece.piece_type  == 2:
+
+					data_structure[element_name].append(False)
+					# check right diagonal
+					if c != 7  :
+						if self.check_movement(squares, f, c, f + 1, c + 1) == True :
+
+							data_structure[element_name].append([f + 1, c + 1])
+						
+					if c != 0 :
+						if self.check_movement(squares, f,c, f + 1, c - 1) == True :
+
+							data_structure[element_name].append([f + 1, c - 1])
+		return data_structure
+
+
 
 
 
