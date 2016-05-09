@@ -35,8 +35,7 @@ def main() :
 
 									juego.pos_comer = partida_object.check_can_eat(juego.tablero.squares, i, j)
 									if len(juego.pos_comer) > 0 :
-										juego.cond_comer = True
-										print "Puede Comer! " + str(juego.pos_comer[0]) + str(juego.pos_comer[1])
+										juego.cond_comer = True 
 									#print ("[" + str(i) + "][" + str(j) + "]")
 									juego.seleccionado = True
 									juego.factual = i
@@ -44,11 +43,24 @@ def main() :
 									continue
 
 							if juego.seleccionado == True :
-								
-								if juego.partida.check_movement(juego.tablero.squares,juego.factual, juego.cactual,i,j) == True :
-									juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
-									print "exito"
-								juego.seleccionado = False
+
+								if juego.cond_comer == True :
+									
+									if(partida_object.check_is_eaten(juego, i, j) == True) :
+
+										juego.cond_comer = False
+										juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
+										juego.seleccionado = False
+										print "eaten"
+									else : 
+										print "no eaten"
+
+								else :
+
+									if juego.partida.check_movement(juego.tablero.squares,juego.factual, juego.cactual,i,j) == True :
+										juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
+										juego.seleccionado = False
+
 								#print str(juego.factual) + " " + str(juego.cactual)
 								#print str(i) + " " + str(j)
 								#juego.tablero.squares[juego.factual][juego.cactual].piece.image = juego.tablero.squares[juego.factual][juego.cactual].piece.imagen_transparente

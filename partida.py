@@ -83,6 +83,17 @@ class Partida() :
 
 		return False
 
+	# check if the player eats a piece
+	def check_is_eaten(self,juego, f_prox, c_prox) :
+
+		for list_comer in juego.pos_comer :
+
+			if f_prox in list_comer and c_prox in list_comer :
+
+				return True
+
+		return False
+
 	def check_can_eat(self, squares, f_actual, c_actual) :
 
 		cond = False
