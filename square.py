@@ -7,6 +7,7 @@ class Square(pygame.Rect) :
 		pygame.Rect.__init__(self,x,y,width, height)
 		self.piece = None
 		self.occupation = 0
+		self.color_selected = ()
 
 	def draw_piece(self, pantalla, piece) :
 
