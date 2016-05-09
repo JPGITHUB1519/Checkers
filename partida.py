@@ -30,7 +30,7 @@ class Partida() :
 
 		if self.check_ispiece(piece_actual) :
 
-			
+
 
 			# check length of the move
 			if self.check_piece_type(piece_actual) == 1 :
@@ -75,6 +75,12 @@ class Partida() :
 		else :
 
 			return False
+
+	def check_is_occupied(square, f, c) :
+
+		if square[f][c].occupation == 1 or square[f][c].occupation == 2 or square[f][c].occupation == 11 or square[f][c].occupation == 22 :
+
+			return True
 
 
 
