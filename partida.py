@@ -28,13 +28,14 @@ class Partida() :
 		piece_actual = squares[f_actual][c_actual].piece
 		piece_prox = squares[f_prox][c_prox].piece
 
+		
 		if self.check_ispiece(piece_actual) == False :
 			return False
 
 		if self.check_is_occupied(squares, f_prox, c_prox) == True :
 
 			return False
-			
+
 		# check length of the move
 		if self.check_piece_type(piece_actual) == 1 :
 			
@@ -74,11 +75,60 @@ class Partida() :
 
 			return False
 
-	def check_is_occupied(self,square, f, c) :
+	def check_is_occupied(self,squares, f, c) :
 
-		if square[f][c].occupation == 1 or square[f][c].occupation == 2 or square[f][c].occupation == 11 or square[f][c].occupation == 22 :
+		if squares[f][c].occupation == 1 or squares[f][c].occupation == 2 or squares[f][c].occupation == 11 or squares[f][c].occupation == 22 :
 
 			return True
+
+		return False
+
+	def check_can_eat(self, squares, f_actual, c_actual) :
+
+		cond = False
+		pos = []
+
+		if squares[f_actual][c_actual].piece.piece_type == 1 :
+			if c_actual != 0 :
+				# si hay una pieza en la diagonal izquierda y esa pieza es del jugador 2
+
+				if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and squares[f_actual - 1][c_actual - 1].piece.piece_type == 2 :
+					
+					if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
+						
+						cond = True
+						pos.append([f_actual - 2, c_actual - 2])
+
+			if c_actual != 7 and c_actual != 6 :
+				# si hay una pieza en la diagonal derecha y esa pieza es del jugador 2
+				
+				if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 2 :
+
+					if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
+
+						cond = True
+						pos.append([f_actual - 2, c_actual + 2])
+
+		if squares[f_actual][c_actual].piece.piece_type == 2 :
+
+			if c_actual != 7 :
+				if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and squares[f_actual + 1][c_actual + 1].piece.piece_type == 1 :
+				
+					if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
+
+						cond = True
+						pos.append([f_actual + 2, c_actual + 2])
+
+			if c_actual != 0 :
+				if self.check_is_occupied(squares,f_actual + 1, c_actual - 1) == True and squares[f_actual + 1][c_actual - 1].piece.piece_type == 1 :
+
+					if self.check_is_occupied(squares,f_actual + 2, c_actual - 2) == False :
+
+						cond = True
+						pos.append([f_actual + 2, c_actual - 2])
+
+		return pos
+
 
 
 

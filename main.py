@@ -30,8 +30,13 @@ def main() :
 
 							# check if clic a piece
 							if partida_object.check_is_occupied(juego.tablero.squares, i, j) == True :
+								
 								if juego.seleccionado == False :
 
+									juego.pos_comer = partida_object.check_can_eat(juego.tablero.squares, i, j)
+									if len(juego.pos_comer) > 0 :
+										juego.cond_comer = True
+										print "Puede Comer! " + str(juego.pos_comer[0]) + str(juego.pos_comer[1])
 									#print ("[" + str(i) + "][" + str(j) + "]")
 									juego.seleccionado = True
 									juego.factual = i
