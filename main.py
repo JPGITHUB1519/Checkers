@@ -2,12 +2,15 @@ import pygame
 import game
 import piece
 import board
+import partida
 
 pygame.init()
 
 def main() :
 
 	juego = game.Game()
+	partida_object = partida.Partida()
+
 
 	while(juego.salir != True) :
 
@@ -25,13 +28,15 @@ def main() :
 
 						if juego.cursor1.colliderect(juego.tablero.squares[i][j]) :
 
-							if juego.seleccionado == False :
+							# check if clic a piece
+							if partida_object.check_is_occupied(juego.tablero.squares, i, j) == True :
+								if juego.seleccionado == False :
 
-								#print ("[" + str(i) + "][" + str(j) + "]")
-								juego.seleccionado = True
-								juego.factual = i
-								juego.cactual = j
-								continue
+									#print ("[" + str(i) + "][" + str(j) + "]")
+									juego.seleccionado = True
+									juego.factual = i
+									juego.cactual = j
+									continue
 
 							if juego.seleccionado == True :
 								

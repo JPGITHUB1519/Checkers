@@ -28,28 +28,26 @@ class Partida() :
 		piece_actual = squares[f_actual][c_actual].piece
 		piece_prox = squares[f_prox][c_prox].piece
 
-		if self.check_ispiece(piece_actual) :
-
-
-
-			# check length of the move
-			if self.check_piece_type(piece_actual) == 1 :
-				
-				if not(f_prox == f_actual - 1 and c_prox in self.check_diagonal(f_actual, c_actual)) :
-
-					return False
-
-			if self.check_piece_type(piece_actual) == 2 :
-
-				if not(f_prox == f_actual + 1 and c_prox in self.check_diagonal(f_actual, c_actual)) :
-
-					return False
-		else :
-
+		if self.check_ispiece(piece_actual) == False :
 			return False
 
-		print 
+		if self.check_is_occupied(squares, f_prox, c_prox) == True :
 
+			return False
+			
+		# check length of the move
+		if self.check_piece_type(piece_actual) == 1 :
+			
+			if not(f_prox == f_actual - 1 and c_prox in self.check_diagonal(f_actual, c_actual)) :
+
+				return False
+
+		if self.check_piece_type(piece_actual) == 2 :
+
+			if not(f_prox == f_actual + 1 and c_prox in self.check_diagonal(f_actual, c_actual)) :
+
+				return False
+	
 		return True
 
 	def check_diagonal(self,i,j) :
@@ -76,7 +74,7 @@ class Partida() :
 
 			return False
 
-	def check_is_occupied(square, f, c) :
+	def check_is_occupied(self,square, f, c) :
 
 		if square[f][c].occupation == 1 or square[f][c].occupation == 2 or square[f][c].occupation == 11 or square[f][c].occupation == 22 :
 
