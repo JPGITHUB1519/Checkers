@@ -25,7 +25,7 @@ class Board() :
 			self.xpos = x
 			self.ypos += 65
 
-		# assign pieces to squares and drawing it
+		# assign pieces to squares
 		for i in range(0,8) :
 
 			for j in range(0,8) :

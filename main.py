@@ -36,10 +36,12 @@ def main() :
 
 							if juego.seleccionado == True :
 								print "hola"
-								#juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
+								juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
 								juego.seleccionado = False
 								#print str(juego.factual) + " " + str(juego.cactual)
-								juego.tablero.squares[juego.factual][juego.cactual].piece.image = juego.tablero.squares[juego.factual][juego.cactual].piece.imagen_transparente
+								#print str(i) + " " + str(j)
+								#juego.tablero.squares[juego.factual][juego.cactual].piece.image = juego.tablero.squares[juego.factual][juego.cactual].piece.imagen_transparente
+								#juego.tablero.squares[i][j].piece.image = juego.tablero.squares[juego.factual][juego.cactual].piece.imagen_pieza_roja
 
 
 		juego.clock.tick(20)
