@@ -12,8 +12,7 @@ class Board() :
 		self.width = width
 		self.height = height
 		self.xpos = x
-		self.ypos = y	
-
+		self.ypos = y
 		# initialize square
 
 		for i in range(0,8) :
@@ -72,6 +71,9 @@ class Board() :
 				else :
 
 					self.assign_positions(i,j,pantalla,0)
+
+		self.board_string = self.get_string_data_structure()
+		self.board_data_structure = self.get_list_data_structure()
 
 		"""
 		self.squares.append(pygame.Rect(x,y,width, height))
@@ -132,6 +134,26 @@ class Board() :
 			string += "\n"
 
 		return string
+
+	def get_list_data_structure(self) :
+
+		lista = []
+		sub = []
+
+		for i in range(0,8) :
+
+			for j in range(0,8) :
+
+				sub.append(self.squares[i][j].piece.piece_type)
+			lista.append(sub)
+			sub = []
+
+		return lista
+
+
+
+
+
 
 
 		
