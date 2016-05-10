@@ -23,6 +23,30 @@ class Partida() :
 		squares[f_prox][c_prox].piece.piece_type = squares[f_actual][c_actual].piece.piece_type
 		squares[f_actual][c_actual].piece.piece_type = 0
 
+	def capture_piece(self,squares, f_actual, c_actual, f_prox, c_prox) :
+
+		if squares[f_actual][c_actual].piece.piece_type == 1 :
+			squares[f_prox + 1][c_prox + 1].piece.image = squares[f_prox + 1][c_prox + 1].piece.imagen_transparente
+			squares[f_prox + 1][c_prox + 1].occupation = 0
+			squares[f_prox + 1][c_prox + 1].piece.piece_type = 0
+
+		if squares[f_actual][c_actual].piece.piece_type == 2 :
+			squares[f_prox - 1][c_prox - 1].piece.image = squares[f_prox - 1][c_prox - 1].piece.imagen_transparente
+			squares[f_prox - 1][c_prox - 1].occupation = 0
+			squares[f_prox - 1][c_prox - 1].piece.piece_type = 0
+		squares[f_prox][c_prox].piece.image = squares[f_actual][c_actual].piece.image
+		squares[f_actual][c_actual].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
+	
+		squares[f_prox][c_prox].occupation = squares[f_actual][c_actual].occupation
+		squares[f_actual][c_actual].occupation = 0
+
+		squares[f_prox][c_prox].piece.piece_type = squares[f_actual][c_actual].piece.piece_type
+		squares[f_actual][c_actual].piece.piece_type = 0
+
+		# reset captured piece
+
+
+
 	def check_movement(self,squares, f_actual, c_actual, f_prox, c_prox) :
 
 		piece_actual = squares[f_actual][c_actual].piece
@@ -157,7 +181,9 @@ class Partida() :
 				if len(aux_cant_eat) > 0 :
 
 					data_structure[element_name].append(True)
-					data_structure[element_name].append(aux_cant_eat)
+
+					for i in aux_cant_eat :
+						data_structure[element_name].append(i)
 					continue
 				if squares[f][c].piece.piece_type  == 1:
 

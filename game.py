@@ -19,6 +19,7 @@ class Game() :
 		self.color_fondo = (250,128,114)
 		self.tablero = board.Board(self.color_blanco, self.color_negro,100,100,65,65, self.pantalla)
 		self.pos_comer = []
+		self.dic_elemento = ""
 		self.cond_comer = False
 		self.cursor1 = cursor.Cursor()
 		self.partida = partida.Partida()
