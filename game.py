@@ -30,6 +30,8 @@ class Game() :
 		self.comio = False
 		self.cursor1 = cursor.Cursor()
 		self.partida = partida.Partida()
+		# to know if the player playerd a valid play
+		self.cond_play_well = False
 
 		self.game_data_structure = {}
 		"""
