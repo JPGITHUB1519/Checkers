@@ -21,10 +21,18 @@ class Game() :
 		self.dic_elemento = ""
 		# to know if we have to capture
 		self.cond_comer = False
-		#to save the turn of the player 
+		#to save the turn of the player
 		self.turno = 1
+		# to save the pieces that has to eat
+		self.comer_data_structure = {} 
+		self.comer_data_structure_element = ""
+		# to know if the player ate
+		self.comio = False
 		self.cursor1 = cursor.Cursor()
 		self.partida = partida.Partida()
+
+		self.game_data_structure = {}
+		"""
 		self.game_data_structure = [[0,2,0,2,0,2,0,2],
 									[2,0,2,0,2,0,2,0],
 									[0,2,0,2,0,2,0,2],
@@ -33,6 +41,7 @@ class Game() :
 									[1,0,1,0,1,0,1,0],
 									[0,1,0,1,0,1,0,1],
 									[1,0,1,0,1,0,1,0]],
+		"""
 		#conds
 		self.cond_main_game = True
 
