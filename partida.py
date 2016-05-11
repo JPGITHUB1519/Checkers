@@ -26,14 +26,35 @@ class Partida() :
 	def capture_piece(self,squares, f_actual, c_actual, f_prox, c_prox) :
 
 		if squares[f_actual][c_actual].piece.piece_type == 1 :
-			squares[f_prox + 1][c_prox + 1].piece.image = squares[f_prox + 1][c_prox + 1].piece.imagen_transparente
-			squares[f_prox + 1][c_prox + 1].occupation = 0
-			squares[f_prox + 1][c_prox + 1].piece.piece_type = 0
+
+			# capture left diagonal
+			if c_actual - c_prox == 2 :
+
+				squares[f_actual - 1][c_actual - 1].piece.image = squares[f_prox - 1][c_prox - 1].piece.imagen_transparente
+				squares[f_actual - 1][c_actual - 1].occupation = 0
+				squares[f_actual - 1][c_actual - 1].piece.piece_type = 0
+
+			# capture right diagonal
+			if c_actual - c_prox == - 2 :
+
+				squares[f_actual - 1][c_actual + 1].piece.image = squares[f_prox - 1][c_prox + 1].piece.imagen_transparente
+				squares[f_actual - 1][c_actual + 1].occupation = 0
+				squares[f_actual - 1][c_actual + 1].piece.piece_type = 0
 
 		if squares[f_actual][c_actual].piece.piece_type == 2 :
-			squares[f_prox - 1][c_prox - 1].piece.image = squares[f_prox - 1][c_prox - 1].piece.imagen_transparente
-			squares[f_prox - 1][c_prox - 1].occupation = 0
-			squares[f_prox - 1][c_prox - 1].piece.piece_type = 0
+
+			# capture left diagonal
+			if c_actual - c_prox == 2 :
+				squares[f_actual + 1][c_actual - 1].piece.image = squares[f_actual + 1][c_actual - 1].piece.imagen_transparente
+				squares[f_actual + 1][c_actual - 1].occupation = 0
+				squares[f_actual + 1][c_actual - 1].piece.piece_type = 0
+
+			# capture right diagonal
+			if c_actual - c_prox == -2 :
+				squares[f_actual + 1][c_actual + 1].piece.image = squares[f_actual + 1][c_actual + 1].piece.imagen_transparente
+				squares[f_actual + 1][c_actual + 1].occupation = 0
+				squares[f_actual + 1][c_actual + 1].piece.piece_type = 0
+
 		squares[f_prox][c_prox].piece.image = squares[f_actual][c_actual].piece.image
 		squares[f_actual][c_actual].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
 	
@@ -146,7 +167,7 @@ class Partida() :
 
 		if squares[f_actual][c_actual].piece.piece_type == 2 :
 
-			if c_actual != 7 :
+			if c_actual != 7 and c_actual != 6 :
 				if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and squares[f_actual + 1][c_actual + 1].piece.piece_type == 1 :
 				
 					if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :

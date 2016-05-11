@@ -56,12 +56,10 @@ def main() :
                                         			break
                                         if data_structure[juego.dic_elemento][moves] == [i,j] :
                                             juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
-
+                               
                                 juego.seleccionado = False
-             
 
         juego.clock.tick(20)
-        
         if juego.cond_main_game == True : 
             juego.main_game()
 
