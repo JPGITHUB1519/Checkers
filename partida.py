@@ -269,6 +269,21 @@ class Partida() :
 		# [condition, dictionarie]
 		return cond, positions
 
+	def piece_have_to_eat(self,comer_data_structure,squares,i,j) :
+
+		cond = False
+		pos = []
+
+		if comer_data_structure[str(i) + str(j)] > 0 :
+
+			pos = comer_data_structure[str(i) + str(j)]
+			cond = True
+
+		return cond, pos
+
+
+
+
 							
 
 
