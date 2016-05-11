@@ -34,15 +34,16 @@ def main() :
                                 
                                 if juego.seleccionado == False :
 
-                                    data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
-                                    print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
-                                    juego.dic_elemento = str(i) + str(j)
-                                    juego.seleccionado = True
-                                    juego.factual = i
-                                    juego.cactual = j
-                                    #print data_structure["45"]
-                                    #print "\n"
-                                    continue
+                                	if juego.turno == juego.tablero.squares[i][j].piece.piece_type :
+	                                    data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
+	                                    #print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
+	                                    juego.dic_elemento = str(i) + str(j)
+	                                    juego.seleccionado = True
+	                                    juego.factual = i
+	                                    juego.cactual = j
+	                                    #print data_structure["45"]
+	                                    #print "\n"
+	                                    continue
 
                             if juego.seleccionado == True :
                                 # recorrer saber si la posicion a mover esta en la estructura de datos
@@ -58,6 +59,17 @@ def main() :
                                             juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
                                
                                 juego.seleccionado = False
+
+                                # change the turns
+
+                                if juego.turno == 1 :
+
+                                	juego.turno = 2
+                                	break
+
+                                if juego.turno == 2 :
+
+                                	juego.turno = 1
 
         juego.clock.tick(20)
         if juego.cond_main_game == True : 

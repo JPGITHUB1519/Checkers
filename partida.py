@@ -30,14 +30,14 @@ class Partida() :
 			# capture left diagonal
 			if c_actual - c_prox == 2 :
 
-				squares[f_actual - 1][c_actual - 1].piece.image = squares[f_prox - 1][c_prox - 1].piece.imagen_transparente
+				squares[f_actual - 1][c_actual - 1].piece.image = squares[f_actual - 1][c_actual - 1].piece.imagen_transparente
 				squares[f_actual - 1][c_actual - 1].occupation = 0
 				squares[f_actual - 1][c_actual - 1].piece.piece_type = 0
 
 			# capture right diagonal
 			if c_actual - c_prox == - 2 :
 
-				squares[f_actual - 1][c_actual + 1].piece.image = squares[f_prox - 1][c_prox + 1].piece.imagen_transparente
+				squares[f_actual - 1][c_actual + 1].piece.image = squares[c_actual - 1][c_actual + 1].piece.imagen_transparente
 				squares[f_actual - 1][c_actual + 1].occupation = 0
 				squares[f_actual - 1][c_actual + 1].piece.piece_type = 0
 
@@ -254,7 +254,7 @@ class Partida() :
 				if squares[f][c].piece.piece_type == player :
 
 					element_name = str(f) + str(c)
-					# asking if the piece has to ead
+					# asking if the piece has to eat
 					if data_structure[element_name][0] == True :
 
 						for i in range(1, len(data_structure[element_name])) :
@@ -265,7 +265,7 @@ class Partida() :
 						pos = []
 						if cond == False :
 							cond = True
-							
+
 		# [condition, dictionarie]
 		return cond, positions
 

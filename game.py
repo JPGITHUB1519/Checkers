@@ -21,6 +21,8 @@ class Game() :
 		self.dic_elemento = ""
 		# to know if we have to capture
 		self.cond_comer = False
+		#to save the turn of the player 
+		self.turno = 1
 		self.cursor1 = cursor.Cursor()
 		self.partida = partida.Partida()
 		self.game_data_structure = [[0,2,0,2,0,2,0,2],
