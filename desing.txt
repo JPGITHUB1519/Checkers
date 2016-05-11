@@ -29,3 +29,7 @@ data_structure = [[],
 				  [],
 				  [],
 				  []]
+
+Data structure of moves
+
+dic = {"position" : [condition,[move1],[move2]....]}

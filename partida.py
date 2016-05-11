@@ -237,6 +237,39 @@ class Partida() :
 							data_structure[element_name].append([f + 1, c - 1])
 		return data_structure
 
+	# check if any player has to capture and return a cond and the
+	# pieces with their positions to capture
+
+	def have_to_eat(self, data_structure, squares, player) :
+
+		# positions = {"position" : [moves]... }
+		positions = {}
+		pos = []
+		cond = False
+		for f in range(0, 8) :
+
+			for c in range(0,8) :
+
+				# asking if the piece is the kind of the player
+				if squares[f][c].piece.piece_type == player :
+
+					element_name = str(f) + str(c)
+					# asking if the piece has to ead
+					if data_structure[element_name][0] == True :
+
+						for i in range(1, len(data_structure[element_name])) :
+
+							pos.append(data_structure[element_name][i])
+						
+						positions[element_name] = pos
+						pos = []
+						if cond == False :
+							cond = True
+							
+		# [condition, dictionarie]
+		return cond, positions
+
+							
 
 
 
@@ -244,4 +277,8 @@ class Partida() :
 
 
 
-		
+
+
+
+
+

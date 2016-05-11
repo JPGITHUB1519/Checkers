@@ -35,14 +35,14 @@ def main() :
                                 if juego.seleccionado == False :
 
                                     data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
+                                    print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
                                     juego.dic_elemento = str(i) + str(j)
                                     juego.seleccionado = True
                                     juego.factual = i
                                     juego.cactual = j
-                                    print data_structure["45"]
-                                    print "\n"
+                                    #print data_structure["45"]
+                                    #print "\n"
                                     continue
-
 
                             if juego.seleccionado == True :
                                 # recorrer saber si la posicion a mover esta en la estructura de datos
