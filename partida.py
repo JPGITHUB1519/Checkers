@@ -167,7 +167,7 @@ class Partida() :
 
 		if squares[f_actual][c_actual].piece.piece_type == 2 :
 
-			if c_actual != 7 and c_actual != 6 :
+			if c_actual != 7 and c_actual != 6 and  f_actual != 6 :
 				if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and squares[f_actual + 1][c_actual + 1].piece.piece_type == 1 :
 				
 					if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
@@ -175,13 +175,15 @@ class Partida() :
 						cond = True
 						pos.append([f_actual + 2, c_actual + 2])
 
-			if c_actual != 0 :
+			if c_actual != 0 and f_actual != 6 :
 				if self.check_is_occupied(squares,f_actual + 1, c_actual - 1) == True and squares[f_actual + 1][c_actual - 1].piece.piece_type == 1 :
 
 					if self.check_is_occupied(squares,f_actual + 2, c_actual - 2) == False :
 
 						cond = True
 						pos.append([f_actual + 2, c_actual - 2])
+
+
 
 		return pos
 
