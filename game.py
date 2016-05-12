@@ -37,6 +37,9 @@ class Game() :
 		self.comer_multiple_data_structure = {}
 		self.game_data_structure = {}
 
+		# squares to selected 
+		#self.square_select = pygame.Rect(0,0,50,50)
+
 		"""
 		self.game_data_structure = [[0,2,0,2,0,2,0,2],
 									[2,0,2,0,2,0,2,0],
@@ -59,6 +62,6 @@ class Game() :
 		self.cursor1.update(self.pantalla)
 
 		self.tablero.draw_pieces(self.pantalla)
-
+		#pygame.draw.rect(self.pantalla,(0,0,0),self.square_select)
 
 
