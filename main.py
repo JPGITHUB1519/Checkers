@@ -50,7 +50,7 @@ def main() :
 
 										if juego.seleccionado == False :
 
-											if juego.turno == juego.tablero.squares[i][j].piece.piece_type :
+											if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
 												juego.comio = False
 												#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
@@ -67,7 +67,7 @@ def main() :
 										# si comio -> juega
 										if juego.seleccionado == False and juego.comio == True :
 
-											if juego.turno == juego.tablero.squares[i][j].piece.piece_type :
+											if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
 												juego.comio = False
 												#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
@@ -128,7 +128,7 @@ def main() :
 						   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
 
 
-						   			print juego.tablero.get_string_data_structure() + "\n"
+						   			#print juego.tablero.get_string_data_structure() + "\n"
 
 									juego.seleccionado = False
 
@@ -145,7 +145,7 @@ def main() :
 											juego.turno = 1
 							else :
 
-								if juego.turno == juego.tablero.squares[i][j].piece.piece_type :
+								if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
 									# if clicked a valid piece assign it as selected
 									juego.seleccionado = True
