@@ -34,7 +34,6 @@ def main() :
 
 								juego.game_data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
 								juego.cond_comer, juego.comer_data_structure = juego.partida.have_to_eat(juego.game_data_structure, juego.tablero.squares, juego.turno)
-
 								# if the piece click is in the data structure
 								if (str(i) + str(j)) in juego.game_data_structure :
 
@@ -85,10 +84,10 @@ def main() :
 							# to see if click a piece no has movement
 							if juego.tablero.squares[i][j].piece.piece_type == 0 :
 							#if len(juego.game_data_structure[str(i) + str(j)]) == 0 :
-							
+
 								if juego.seleccionado == True :
 
-									print juego.game_data_structure["00"]
+									#print juego.game_data_structure
 
 									juego.cond_play_well = False
 									# recorrer saber si la posicion a mover esta en la estructura de datos
@@ -114,6 +113,23 @@ def main() :
 											if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
 												juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
 								   				juego.cond_play_well = True
+
+								   	# become the player 1 piece  king
+					   				if juego.tablero.squares[i][j].piece.piece_type == 1 and juego.tablero.squares[i][j].piece.isking == False :
+
+						   				if i == 0 :
+
+						   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
+						   					
+					   				# become the player 2 piece  king
+					   				if juego.tablero.squares[i][j].piece.piece_type == 2 and juego.tablero.squares[i][j].piece.isking == False :
+
+					   					if i == 7 :
+						   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
+
+
+						   			print juego.tablero.get_string_data_structure() + "\n"
+
 									juego.seleccionado = False
 
 									if juego.cond_play_well  == True :
@@ -136,6 +152,7 @@ def main() :
 									juego.factual, juego.cactual = i, j
 									juego.cond_play_well = True
 									juego.dic_elemento = str(i) + str(j)
+
 
 		juego.clock.tick(20)
 		if juego.cond_main_game == True : 

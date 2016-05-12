@@ -282,6 +282,22 @@ class Partida() :
 
 		return cond, pos
 
+	def become_king(self,turno, squares,i,j) :
+
+		if turno == 1 and squares[i][j].piece.isking == False :
+
+			squares[i][j].piece.image = squares[i][j].piece.imagen_pieza_king1
+			squares[i][j].piece.piece_type = 11
+			squares[i][j].occupation = 11
+			squares[i][j].piece.isking = True
+
+		if turno == 2 and squares[i][j].piece.isking == False :
+
+			squares[i][j].piece.image = squares[i][j].piece.imagen_pieza_king2
+			squares[i][j].piece.piece_type = 22
+			squares[i][j].occupation = 22
+			squares[i][j].piece.isking = True
+
 
 
 
