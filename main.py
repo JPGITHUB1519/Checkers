@@ -88,7 +88,8 @@ def main() :
 								if juego.seleccionado == True :
 
 									#print juego.game_data_structure
-
+									print juego.comer_data_structure
+									print "\n"
 									juego.cond_play_well = False
 									# recorrer saber si la posicion a mover esta en la estructura de datos
 									if len(juego.game_data_structure[juego.dic_elemento]) > 1 :
@@ -128,7 +129,7 @@ def main() :
 						   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
 
 
-						   			#print juego.tablero.get_string_data_structure() + "\n"
+						   			print juego.tablero.get_string_data_structure() + "\n"
 
 									juego.seleccionado = False
 
@@ -152,7 +153,6 @@ def main() :
 									juego.factual, juego.cactual = i, j
 									juego.cond_play_well = True
 									juego.dic_elemento = str(i) + str(j)
-
 
 		juego.clock.tick(20)
 		if juego.cond_main_game == True : 
