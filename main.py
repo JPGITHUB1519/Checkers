@@ -85,7 +85,10 @@ def main() :
 							# to see if click a piece no has movement
 							if len(juego.game_data_structure[str(i) + str(j)]) == 0 :
 
+			
 								if juego.seleccionado == True :
+
+									print juego.game_data_structure
 
 									juego.cond_play_well = False
 									# recorrer saber si la posicion a mover esta en la estructura de datos
@@ -125,11 +128,14 @@ def main() :
 
 											juego.turno = 1
 							else :
+								if juego.turno == juego.tablero.squares[i][j].piece.piece_type :
 
-								juego.seleccionado = True
-								juego.factual, juego.cactual = i, j
+									# if clicked a valid piece assign it as selected
+									juego.seleccionado = True
+									juego.factual, juego.cactual = i, j
+									juego.cond_play_well = True
+									juego.dic_elemento = str(i) + str(j)
 
-								juego.dic_elemento = str(i) + str(j)
 		juego.clock.tick(20)
 		if juego.cond_main_game == True : 
 			juego.main_game()

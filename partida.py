@@ -269,6 +269,7 @@ class Partida() :
 		# [condition, dictionarie]
 		return cond, positions
 
+	# return the condition and the pos a piece have to eat
 	def piece_have_to_eat(self,comer_data_structure,squares,i,j) :
 
 		cond = False

@@ -36,6 +36,7 @@ class Game() :
 		self.comer_multiple_cond = False
 		self.comer_multiple_data_structure = {}
 		self.game_data_structure = {}
+
 		"""
 		self.game_data_structure = [[0,2,0,2,0,2,0,2],
 									[2,0,2,0,2,0,2,0],
