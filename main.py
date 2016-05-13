@@ -34,7 +34,7 @@ def main() :
 
 								juego.game_data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
 								juego.cond_comer, juego.comer_data_structure = juego.partida.have_to_eat(juego.game_data_structure, juego.tablero.squares, juego.turno)
-								print juego.comer_data_structure
+								#print juego.comer_data_structure
 
 								# if the piece click is in the data structure
 								if (str(i) + str(j)) in juego.game_data_structure :
@@ -159,8 +159,6 @@ def main() :
 		if juego.cond_main_game == True : 
 			juego.main_game()
 
-
-				
 		pygame.display.update()
 
 	pygame.quit()

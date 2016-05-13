@@ -328,7 +328,6 @@ class Partida() :
 		Movement. dict key = piece, dic value = position to capture
 
 		"""
-
 		data_structure = {}
 		element_name = ""
 		aux_cant_eat = []
