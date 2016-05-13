@@ -1,0 +1,19 @@
+Pieza 1 Izquierda :
+
+c != 0 and c ! = 1 and f != 0 and f != 1
+
+pieza 1 derecha
+
+c != 6 and c!= 7 and f != 0 and f != 1
+
+pieza 2 izquierda :
+
+c != 0 and c ! = 1  and f != 6 and f != 7
+
+pieza 2 derecha :
+
+c != 6 and c!= 7 and f != 6 and f != 7
+
+Dama Jugador 1 y 2
+
+todo lo anterior junto

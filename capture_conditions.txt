@@ -1,0 +1,35 @@
+To capturing  the piece
+
+Pieza 1 y Pieza 2 :
+
+	Left :
+
+		c_actual - c_prox ==  2
+
+	Right :
+
+		c_actual - c_prox ==  -2
+
+Dama 1 y Dama 2 :
+
+	Left UP :
+
+		c_actual - c_prox ==  2 and f_actual - f_prox == 2
+		
+	Right UP :
+
+		c_actual - c_prox ==  2 and f_actual - f_prox == 2
+
+	Left Down :
+
+		c_actual - c_prox ==  2 and f_actual - f_prox ==  - 2
+
+	Right Down :
+
+		c_actual - c_prox ==  2 and f_actual - f_prox == - 2
+
+
+
+		 
+
+
