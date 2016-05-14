@@ -31,30 +31,21 @@ def main() :
 							# check if clic a piece
 							if partida_object.check_is_occupied(juego.tablero.squares, i, j) == True :
 								
-
+								# save all posibles movements
 								juego.game_data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
 								juego.cond_comer, juego.comer_data_structure = juego.partida.have_to_eat(juego.game_data_structure, juego.tablero.squares, juego.turno)
+								print juego.cond_comer
 								#print juego.comer_data_structure
 
-								# if the piece click is in the data structure
-								if (str(i) + str(j)) in juego.game_data_structure :
+								# hay alguna pieza que tenga que comer?
+								if juego.cond_comer == True :
 
-									# si le toca comer y
-									if juego.cond_comer == True :
-										juego.comer_data_structure_element = str(i) + str(j)
-										# comio?
-										if juego.comer_data_structure_element in juego.comer_data_structure :
-
-											juego.comio = True
-
-									# si no le toca comer no pregunta sobre eso
-									if juego.cond_comer == False :
+									if (str(i) + str(j)) in juego.comer_data_structure :
 
 										if juego.seleccionado == False :
 
 											if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
-												juego.comio = False
 												#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
 												
 												juego.seleccionado = True
@@ -64,14 +55,17 @@ def main() :
 
 												#print juego.game_data_structure["45"]
 												#print "\n"
-												continue
-									else :
-										# si comio -> juega
-										if juego.seleccionado == False and juego.comio == True :
+												continue 
+
+								# si no tiene que comer juega normal
+								else : 
+								# if the piece click is in the data structure
+									if (str(i) + str(j)) in juego.game_data_structure :
+
+										if juego.seleccionado == False :
 
 											if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
-												juego.comio = False
 												#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
 												
 												juego.seleccionado = True
@@ -81,9 +75,10 @@ def main() :
 
 												#print juego.game_data_structure["45"]
 												#print "\n"
-												continue
+												continue 
 
 							# to see if click a piece no has movement
+							# clickeo en un cuadro vacio?
 							if juego.tablero.squares[i][j].piece.piece_type == 0 :
 							#if len(juego.game_data_structure[str(i) + str(j)]) == 0 :
 
@@ -99,6 +94,7 @@ def main() :
 
 											# preguntar si le toca comer
 											if juego.game_data_structure[juego.dic_elemento][0] == True :
+
 												if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
 														juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j)
 														juego.cond_play_well = True
@@ -135,25 +131,35 @@ def main() :
 									juego.seleccionado = False
 
 									if juego.cond_play_well  == True :
+
 										# change the turns
 
 										if juego.turno == 1 :
 
 											juego.turno = 2
-											break
+											continue
 
 										if juego.turno == 2 :
 
 											juego.turno = 1
+
 							else :
 
 								if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
-									# if clicked a valid piece assign it as selected
-									juego.seleccionado = True
-									juego.factual, juego.cactual = i, j
-									juego.cond_play_well = True
-									juego.dic_elemento = str(i) + str(j)
+									if juego.cond_comer == True  :
+										
+										if str(i) + str(j) in juego.comer_data_structure  :
+
+											# if clicked a valid piece assign it as selected
+											juego.seleccionado = True
+											juego.factual, juego.cactual = i, j
+											juego.dic_elemento = str(i) + str(j)
+
+									else :
+										juego.seleccionado = True
+										juego.factual, juego.cactual = i, j
+										juego.dic_elemento = str(i) + str(j)
 
 		juego.clock.tick(20)
 		if juego.cond_main_game == True : 

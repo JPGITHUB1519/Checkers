@@ -94,8 +94,6 @@ class Partida() :
 
 		
 
-
-
 	def check_movement(self,squares, f_actual, c_actual, f_prox, c_prox) :
 
 		""" Checks if a move is a valid Move"""

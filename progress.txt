@@ -1,8 +1,13 @@
 to do :
 	
-	bug fix eating last line
-	eat obliged
-	make kings
-	movement and legal moves for kings
+	eat obligated
+	multiples eat
+	highlight pieces movement
+
+doing :
+
+	
+
+
 	
 
