@@ -24,6 +24,15 @@ class Piece(pygame.sprite.Sprite) :
 
 			self.image = self.imagen_pieza_negra
 
+		if self.piece_type == 11 : 
+
+			self.image = self.imagen_pieza_king1
+
+		if self.piece_type == 22 :
+
+			self.image = self.imagen_pieza_king2
+
+
 		self.rect = self.image.get_rect()
 		self.rect.left, self.rect.top = x, y
 

@@ -1,0 +1,14 @@
+Antes de seleccionar :
+
+	Hay alguna Pieza que tiene que comer multiple? :
+
+		La pieza seleccionada es la que tiene que comer multiple? 
+
+			seleccionar pieza
+
+
+Luego de comer :
+
+	tiene la misma pieza que comer de nuevo? :
+
+		comer_multiple = True

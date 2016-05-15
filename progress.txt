@@ -1,12 +1,14 @@
 to do :
 	
-	eat obligated
-	multiples eat
+	kings pieces can eat once
+	
 	highlight pieces movement
 
 doing :
 
-	
+	In multiples eating normal piezas can eat backward
+
+
 
 
 	

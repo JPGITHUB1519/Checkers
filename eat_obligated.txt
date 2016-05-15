@@ -1,0 +1,22 @@
+Antes de seleccionar la pieza :
+
+	Hay alguna pieza que tiene que comer?
+
+		está la pieza clickeada en las que tienen que comer? :
+
+			La pieza seleccionada está entre la que tienen  que comer? 
+
+				Seleccionar la pieza....
+
+	de lo contrario 
+
+		Está la pieza en la estructura de datos?
+
+			seleccioanr la pieza...
+
+
+
+
+variables :
+
+	condicion comer

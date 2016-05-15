@@ -109,7 +109,7 @@ class Board() :
 						pygame.draw.rect(pantalla, self.color1, self.squares[i][j])
 
 	def assign_positions(self,fila,columna,pantalla, occupation) :
-
+		""" Asign The Piece and The ocupation to a Square"""
 		self.squares[fila][columna].piece = piece.Piece(occupation, self.squares[fila][columna].left + 10 , self.squares[fila][columna].top + 10)
 		self.squares[fila][columna].occupation = occupation
 

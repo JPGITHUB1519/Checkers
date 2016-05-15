@@ -33,8 +33,13 @@ class Game() :
 		# to know if the player playerd a valid play
 		self.cond_play_well = False
 
+		# comer multiple
 		self.comer_multiple_cond = False
-		self.comer_multiple_data_structure = {}
+		self.aux_comer_data_structure = {}
+		self.aux_game_data_structure = {}
+		self.f_comer_multiple = 0
+		self.cond_comer_multiple = False
+
 		self.game_data_structure = {}
 
 		# squares to selected 
