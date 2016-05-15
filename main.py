@@ -36,7 +36,7 @@ def main() :
 								juego.cond_comer, juego.comer_data_structure = juego.partida.have_to_eat(juego.game_data_structure, juego.tablero.squares, juego.turno)
 					
 								#print juego.comer_data_structure
-
+								"""
 								# si hay alguna pieza que le toca comer multiple
 								if juego.cond_comer_multiple == True :
 									# si la pieza seleccionada es la que tiene que comer
@@ -57,7 +57,7 @@ def main() :
 												#print "\n"
 												continue 
 
-
+								"""
 								# hay alguna pieza que tenga que comer?
 								if juego.cond_comer == True  :
 
@@ -119,13 +119,11 @@ def main() :
 												if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
 
 														print juego.comer_multiple_cond
-														if juego.cond_comer_multiple == False :
-															juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j)
-														else :
-															juego.partida.capture_piece(juego.tablero.squares, juego.f_comer_multiple, juego.c_comer_multiple, i, j, True)
 
+														juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j)
 														juego.cond_play_well = True
-
+														juego.cond_play_well = False
+														"""
 														# here ask if the same pieza have to eat again
 														# here i can ask as king
 														juego.aux_game_data_structure = juego.partida.check_all_pieces_movement(juego.tablero.squares, True)
@@ -140,7 +138,8 @@ def main() :
 														if juego.comer_multiple_cond == True :
 
 															juego.cond_play_well = False
-  
+  														"""
+
 														break
 
 											if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
