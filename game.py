@@ -2,12 +2,17 @@ import pygame
 import board
 import cursor
 import partida
+import boton
+import sys
 
 class Game() :
 
 	def __init__(self) :
 
 		self.pantalla = pygame.display.set_mode([700,700])
+		pygame.display.set_caption("CHECKERS GAME")
+		self.icon = pygame.image.load("images/icon_checkers.png")
+		pygame.display.set_icon(self.icon)
 		self.salir = False
 		self.seleccionado = False
 		self.factual = 0
@@ -45,6 +50,10 @@ class Game() :
 		# squares to selected 
 		self.square_selected = pygame.Rect(0,0,50,50)
 
+		# f , c, cantidad
+		self.comidas = [None,None,0]
+
+
 		"""
 		self.game_data_structure = [[0,2,0,2,0,2,0,2],
 									[2,0,2,0,2,0,2,0],
@@ -56,7 +65,32 @@ class Game() :
 									[1,0,1,0,1,0,1,0]],
 		"""
 		#conds
-		self.cond_main_game = True
+		self.cond_main_game = False
+		self.cond_menu = True
+
+		# imagenes
+		self.fondo_menu = pygame.image.load("images/fondo_menu.png")
+		self.fondo_title = pygame.image.load("images/title.png")
+
+		self.imagen_boton_jugar = pygame.image.load("images/jugar.png")
+		self.imagen_boton_jugar_hover = pygame.image.load("images/jugar_hover.png")
+
+		self.imagen_boton_salir = pygame.image.load("images/salir.png")
+		self.imagen_boton_salir_hover = pygame.image.load("images/salir_hover.png")
+		
+		# botones
+		self.boton_jugar = boton.Boton(self.imagen_boton_jugar, self.imagen_boton_jugar_hover, 200,500)
+		self.boton_salir = boton.Boton(self.imagen_boton_salir, self.imagen_boton_salir_hover, 400,500)
+
+		# fonts
+
+		self.font_orena = pygame.font.Font("fonts/Orena.ttf",30)
+		self.text_credits = self.font_orena.render("Game Created By Jean Urenia", 0, (255,69,0))
+
+		# sounds and sounds_conds
+
+		self.cond_music_title = False
+		self.cond_music_background = False
 
 	def main_game(self) :
 
@@ -67,6 +101,28 @@ class Game() :
 		self.cursor1.update(self.pantalla)
 
 		self.tablero.draw_pieces(self.pantalla)
+
+		if self.cond_music_background == False :
+			pygame.mixer.music.stop()
+			pygame.mixer.music.load("music/background.mp3")
+			pygame.mixer.music.play(-1)
+			self.cond_music_background = True 
+
+
+	def menu(self) :
+
+		self.cursor1.update(self.pantalla)
+		self.pantalla.blit(self.fondo_menu, (0,0))
+		self.pantalla.blit(self.fondo_title, (100,150))
+		self.boton_jugar.update(self.pantalla, self.cursor1)
+		self.boton_salir.update(self.pantalla, self.cursor1)
+		self.pantalla.blit(self.text_credits, (75,650))
+
+		if self.cond_music_title == False :
+			pygame.mixer.music.load("music/sountrack_title.mp3")
+			pygame.mixer.music.play(-1)
+			self.cond_music_title = True 
+
 
 
 

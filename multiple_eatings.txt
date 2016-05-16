@@ -12,3 +12,13 @@ Luego de comer :
 	tiene la misma pieza que comer de nuevo? :
 
 		comer_multiple = True
+
+Eat BACKWARD
+
+si la pieza  que toca comer le hubiese tocado antes :
+
+	funcion comer rey
+
+else :
+	
+	agregar a pieza comida

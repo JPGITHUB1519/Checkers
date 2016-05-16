@@ -3,6 +3,7 @@ import game
 import piece
 import board
 import partida
+import sys
 
 pygame.init()
 
@@ -22,180 +23,211 @@ def main() :
 
 			if event.type == pygame.MOUSEBUTTONDOWN :
 
-				for i in range(0,8) :
+				# menu functions
 
-					for j in range(0,8) :
+				if juego.cond_menu == True :
 
-						if juego.cursor1.colliderect(juego.tablero.squares[i][j]) :
+					if juego.cursor1.colliderect(juego.boton_jugar.rect) :
 
-							# check if clic a piece
-							if partida_object.check_is_occupied(juego.tablero.squares, i, j) == True :
-								
-								# save all posibles movements
-								juego.game_data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
-								juego.cond_comer, juego.comer_data_structure = juego.partida.have_to_eat(juego.game_data_structure, juego.tablero.squares, juego.turno)
-					
-								#print juego.comer_data_structure
-								"""
-								# si hay alguna pieza que le toca comer multiple
-								if juego.cond_comer_multiple == True :
-									# si la pieza seleccionada es la que tiene que comer
-									if i == juego.f_comer_multiple and j == juego.c_comer_multiple :
+						juego.cond_main_game = True
+						juego.cond_menu = False
 
-										if juego.seleccionado == False :
+					if juego.cursor1.colliderect(juego.boton_salir.rect) :
 
-											if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+						pygame.quit()
+						# salir del programa
+						sys.exit(0)
 
-												#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
-												em
-												juego.seleccionado = True
-												juego.factual = i
-												juego.cactual = j
-												juego.dic_elemento = str(i) + str(j)
+				# if the game is in the main game
 
-												#print juego.game_data_structure["45"]
-												#print "\n"
-												continue 
+				if juego.cond_main_game == True : 
+					for i in range(0,8) :
 
-								"""
-								# hay alguna pieza que tenga que comer?
-								if juego.cond_comer == True  :
+						for j in range(0,8) :
 
-									if (str(i) + str(j)) in juego.comer_data_structure :
+							if juego.cursor1.colliderect(juego.tablero.squares[i][j]) :
 
-										if juego.seleccionado == False :
+								# check if clic a piece
+								if partida_object.check_is_occupied(juego.tablero.squares, i, j) == True :
+									
+									# save all posibles movements
+									juego.game_data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
+									juego.cond_comer, juego.comer_data_structure = juego.partida.have_to_eat(juego.game_data_structure, juego.tablero.squares, juego.turno)
+						
+									#print juego.comer_data_structure
+									"""
+									# si hay alguna pieza que le toca comer multiple
+									if juego.cond_comer_multiple == True :
+										# si la pieza seleccionada es la que tiene que comer
+										if i == juego.f_comer_multiple and j == juego.c_comer_multiple :
 
-											if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+											if juego.seleccionado == False :
 
-												#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
-												
-												juego.seleccionado = True
-												juego.factual = i
-												juego.cactual = j
-												juego.dic_elemento = str(i) + str(j)
+												if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
-												#print juego.game_data_structure["45"]
-												#print "\n"
-												continue 
+													#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
+													em
+													juego.seleccionado = True
+													juego.factual = i
+													juego.cactual = j
+													juego.dic_elemento = str(i) + str(j)
 
-								# si no tiene que comer juega normal
-								else : 
-								# if the piece click is in the data structure
-									if (str(i) + str(j)) in juego.game_data_structure :
+													#print juego.game_data_structure["45"]
+													#print "\n"
+													continue 
 
-										if juego.seleccionado == False :
+									"""
+									# hay alguna pieza que tenga que comer?
+									if juego.cond_comer == True  :
+										print "a"
+										if (str(i) + str(j)) in juego.comer_data_structure :
 
-											if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+											if juego.seleccionado == False :
 
-												#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
-												
-												juego.seleccionado = True
-												juego.factual = i
-												juego.cactual = j
-												juego.dic_elemento = str(i) + str(j)
+												if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
-												#print juego.game_data_structure["45"]
-												#print "\n"
-												continue 
+													#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
+													
+													juego.seleccionado = True
+													juego.factual = i
+													juego.cactual = j
+													juego.dic_elemento = str(i) + str(j)
 
-							# to see if click a piece no has movement
-							# clickeo en un cuadro vacio?
-							if juego.tablero.squares[i][j].piece.piece_type == 0 :
-							#if len(juego.game_data_structure[str(i) + str(j)]) == 0 :
+													if i == juego.comidas[0] and j == juego.comidas[1] :
 
-								if juego.seleccionado == True :
+														print True
 
-									#print juego.game_data_structure
-									#print "\n"
-									juego.cond_play_well = False
-									# recorrer saber si la posicion a mover esta en la estructura de datos
-									if len(juego.game_data_structure[juego.dic_elemento]) > 1 :
+													else :
 
-										for moves in range(0, len(juego.game_data_structure[juego.dic_elemento])) :
+														juego.comidas[0] = i
+														juego.comidas[1] = j
+														juego.comidas[2] = juego.comidas[2] + 1
 
-											# preguntar si le toca comer
-											if juego.game_data_structure[juego.dic_elemento][0] == True :
+													#print juego.game_data_structure["45"]
+													#print "\n"
+													continue 
+
+									# si no tiene que comer juega normal
+									else : 
+									# if the piece click is in the data structure
+										if (str(i) + str(j)) in juego.game_data_structure :
+
+											if juego.seleccionado == False :
+
+												if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+
+													#print juego.partida.have_to_eat(data_structure, juego.tablero.squares, 2)
+													
+													juego.seleccionado = True
+													juego.factual = i
+													juego.cactual = j
+													juego.dic_elemento = str(i) + str(j)
+
+													#print juego.game_data_structure["45"]
+													#print "\n"
+													continue 
+
+								# to see if click a piece no has movement
+								# clickeo en un cuadro vacio?
+								if juego.tablero.squares[i][j].piece.piece_type == 0 :
+								#if len(juego.game_data_structure[str(i) + str(j)]) == 0 :
+
+									if juego.seleccionado == True :
+
+										#print juego.game_data_structure
+										#print "\n"
+										juego.cond_play_well = False
+										# recorrer saber si la posicion a mover esta en la estructura de datos
+										if len(juego.game_data_structure[juego.dic_elemento]) > 1 :
+
+											for moves in range(0, len(juego.game_data_structure[juego.dic_elemento])) :
+
+												# preguntar si le toca comer
+												if juego.game_data_structure[juego.dic_elemento][0] == True :
+
+													if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
+
+															juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j)
+															juego.cond_play_well = True
+															
+															"""
+															# here ask if the same pieza have to eat again
+															# here i can ask as king
+															juego.aux_game_data_structure = juego.partida.check_all_pieces_movement(juego.tablero.squares, True)
+															juego.aux_comer_data_structure = juego.partida.have_to_eat(juego.aux_game_data_structure, juego.tablero.squares, juego.turno)[1]
+															print juego.aux_comer_data_structure
+															# ver si la pieza actual puede capturar
+															juego.comer_multiple_cond = juego.partida.piece_have_to_eat(juego.aux_comer_data_structure,juego.tablero.squares,i,j)[0]
+															juego.f_comer_multiple = i
+															juego.c_comer_multiple = j
+															
+															#if have to eat again cannot change of turn
+															if juego.comer_multiple_cond == True :
+
+																juego.cond_play_well = False
+	  														"""
+
+															break
 
 												if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
+													juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
+									   				juego.cond_play_well = True
 
-														print juego.comer_multiple_cond
+									   	# become the player 1 piece  king
+						   				if juego.tablero.squares[i][j].piece.piece_type == 1 and juego.tablero.squares[i][j].piece.isking == False :
 
-														juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j)
-														juego.cond_play_well = True
-														juego.cond_play_well = False
-														"""
-														# here ask if the same pieza have to eat again
-														# here i can ask as king
-														juego.aux_game_data_structure = juego.partida.check_all_pieces_movement(juego.tablero.squares, True)
-														juego.aux_comer_data_structure = juego.partida.have_to_eat(juego.aux_game_data_structure, juego.tablero.squares, juego.turno)[1]
-														print juego.aux_comer_data_structure
-														# ver si la pieza actual puede capturar
-														juego.comer_multiple_cond = juego.partida.piece_have_to_eat(juego.aux_comer_data_structure,juego.tablero.squares,i,j)[0]
-														juego.f_comer_multiple = i
-														juego.c_comer_multiple = j
-														
-														#if have to eat again cannot change of turn
-														if juego.comer_multiple_cond == True :
+							   				if i == 0 :
 
-															juego.cond_play_well = False
-  														"""
+							   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
+							   					
+						   				# become the player 2 piece  king
+						   				if juego.tablero.squares[i][j].piece.piece_type == 2 and juego.tablero.squares[i][j].piece.isking == False :
 
-														break
-
-											if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
-												juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
-								   				juego.cond_play_well = True
-
-								   	# become the player 1 piece  king
-					   				if juego.tablero.squares[i][j].piece.piece_type == 1 and juego.tablero.squares[i][j].piece.isking == False :
-
-						   				if i == 0 :
-
-						   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
-						   					
-					   				# become the player 2 piece  king
-					   				if juego.tablero.squares[i][j].piece.piece_type == 2 and juego.tablero.squares[i][j].piece.isking == False :
-
-					   					if i == 7 :
-						   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
+						   					if i == 7 :
+							   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
 
 
-						   			#print juego.tablero.get_string_data_structure() + "\n"
+							   			#print juego.tablero.get_string_data_structure() + "\n"
 
-									juego.seleccionado = False
+										juego.seleccionado = False
 
-									if juego.cond_play_well  == True :
+										if juego.cond_play_well  == True :
 
-										# change the turns
+											# change the turns
 
-										if juego.turno == 1 :
+											if juego.turno == 1 :
 
-											juego.turno = 2
-											continue
+												juego.turno = 2
+												continue
 
-										if juego.turno == 2 :
+											if juego.turno == 2 :
 
-											juego.turno = 1
+												juego.turno = 1
 
-							else :
+								else :
 
-								if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+									if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
-									if juego.cond_comer == True  :
+										if juego.cond_comer == True  :
 
-										if str(i) + str(j) in juego.comer_data_structure  :
+											if str(i) + str(j) in juego.comer_data_structure  :
 
-											# if clicked a valid piece assign it as selected
+												# if clicked a valid piece assign it as selected
+												juego.seleccionado = True
+												juego.factual, juego.cactual = i, j
+												juego.dic_elemento = str(i) + str(j)
+
+										else :
 											juego.seleccionado = True
 											juego.factual, juego.cactual = i, j
 											juego.dic_elemento = str(i) + str(j)
 
-									else :
-										juego.seleccionado = True
-										juego.factual, juego.cactual = i, j
-										juego.dic_elemento = str(i) + str(j)
-
 		juego.clock.tick(20)
+
+		if juego.cond_menu == True :
+
+			juego.menu()
+
 		if juego.cond_main_game == True : 
 			juego.main_game()
 
