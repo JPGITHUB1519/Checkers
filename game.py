@@ -9,7 +9,7 @@ class Game() :
 
 	def __init__(self) :
 
-		self.pantalla = pygame.display.set_mode([700,700])
+		self.pantalla = pygame.display.set_mode([900,700])
 		pygame.display.set_caption("CHECKERS GAME")
 		self.icon = pygame.image.load("images/icon_checkers.png")
 		pygame.display.set_icon(self.icon)
@@ -71,6 +71,8 @@ class Game() :
 		# imagenes
 		self.fondo_menu = pygame.image.load("images/fondo_menu.png")
 		self.fondo_title = pygame.image.load("images/title.png")
+		self.imagen_pieza_negra = pygame.image.load("images/black_piece.png")
+		self.imagen_pieza_roja = pygame.image.load("images/red_piece.png")
 
 		self.imagen_boton_jugar = pygame.image.load("images/jugar.png")
 		self.imagen_boton_jugar_hover = pygame.image.load("images/jugar_hover.png")
@@ -85,14 +87,23 @@ class Game() :
 		# fonts
 
 		self.font_orena = pygame.font.Font("fonts/Orena.ttf",30)
-		self.text_credits = self.font_orena.render("Game Created By Jean Urenia", 0, (255,69,0))
+		self.font_arial = pygame.font.SysFont("Arial", 30)
 
+		# Text
+		self.text_credits = self.font_orena.render("Game Created By Jean Urenia", 0, (255,69,0))
+		self.text_turn = self.font_arial.render("Turno :",0,(0,0,0))
+		self.text_jugador = None
 		# sounds and sounds_conds
 
 		self.cond_music_title = False
 		self.cond_music_background = False
+		self.cond_sound_move_piece = False
+		self.sound_move_piece = pygame.mixer.Sound("music/move_piece.wav")
+		self.main_channel = pygame.mixer.Channel(0)
+
 
 	def main_game(self) :
+
 
 		self.pantalla.fill(self.color_fondo)
 
@@ -102,12 +113,31 @@ class Game() :
 
 		self.tablero.draw_pieces(self.pantalla)
 
+		"""
 		if self.cond_music_background == False :
 			pygame.mixer.music.stop()
 			pygame.mixer.music.load("music/background.mp3")
 			pygame.mixer.music.play(-1)
 			self.cond_music_background = True 
+		"""
 
+
+		if self.turno == 1 :
+
+			self.text_jugador = self.font_arial.render("Jugador 1",0,(0,0,0))
+			self.pantalla.blit(self.imagen_pieza_roja,(750,200))
+		else :
+
+			self.text_jugador = self.font_arial.render("Jugador 2",0,(0,0,0))
+			self.pantalla.blit(self.imagen_pieza_negra,(750,200))
+		self.pantalla.blit(self.text_turn, (700,100))
+		self.pantalla.blit(self.text_jugador, (700,150))
+
+		# initialize sounds
+
+		self.cond_music_title = False
+		self.cond_music_background = False
+		self.cond_sound_move_piece = False
 
 	def menu(self) :
 
@@ -118,15 +148,23 @@ class Game() :
 		self.boton_salir.update(self.pantalla, self.cursor1)
 		self.pantalla.blit(self.text_credits, (75,650))
 
+		"""
 		if self.cond_music_title == False :
 			pygame.mixer.music.load("music/sountrack_title.mp3")
 			pygame.mixer.music.play(-1)
 			self.cond_music_title = True 
-
-
-
-
+		"""
 		#pygame.draw.rect(self.pantalla,(0,0,0),self.square_selected)
+
+	def play_sound(self, channel, sound, cond) :
+
+		if cond == False :
+
+			channel.play(sound)
+
+		cond = True
+
+
 
 	
 

@@ -79,7 +79,7 @@ def main() :
 									"""
 									# hay alguna pieza que tenga que comer?
 									if juego.cond_comer == True  :
-										print "a"
+										
 										if (str(i) + str(j)) in juego.comer_data_structure :
 
 											if juego.seleccionado == False :
@@ -93,16 +93,7 @@ def main() :
 													juego.cactual = j
 													juego.dic_elemento = str(i) + str(j)
 
-													if i == juego.comidas[0] and j == juego.comidas[1] :
-
-														print True
-
-													else :
-
-														juego.comidas[0] = i
-														juego.comidas[1] = j
-														juego.comidas[2] = juego.comidas[2] + 1
-
+			
 													#print juego.game_data_structure["45"]
 													#print "\n"
 													continue 
@@ -147,10 +138,11 @@ def main() :
 
 													if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
 
+															"""
 															juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j)
 															juego.cond_play_well = True
 															
-															"""
+															
 															# here ask if the same pieza have to eat again
 															# here i can ask as king
 															juego.aux_game_data_structure = juego.partida.check_all_pieces_movement(juego.tablero.squares, True)
@@ -166,12 +158,16 @@ def main() :
 
 																juego.cond_play_well = False
 	  														"""
-
+	  														# play sound
+	  														juego.play_sound(juego.main_channel, juego.sound_move_piece, juego.cond_sound_move_piece)
 															break
 
 												if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
 													juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
 									   				juego.cond_play_well = True
+									   				# play sounds
+									   				juego.play_sound(juego.main_channel, juego.sound_move_piece, juego.cond_sound_move_piece)
+
 
 									   	# become the player 1 piece  king
 						   				if juego.tablero.squares[i][j].piece.piece_type == 1 and juego.tablero.squares[i][j].piece.isking == False :
