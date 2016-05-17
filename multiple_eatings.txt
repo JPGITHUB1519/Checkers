@@ -15,10 +15,11 @@ Luego de comer :
 
 Eat BACKWARD
 
-si la pieza  que toca comer le hubiese tocado antes :
+si la pieza  que le toca comer le hubiese tocado antes :
 
-	funcion comer rey
+	funcion comer como rey
 
-else :
-	
-	agregar a pieza comida
+eat multiple es un flag para saber si la pieza estaba comiendo
+consecutivamente o comia por primera vez. Si comia consecutivamente
+significa que la proxima vez que coma puede comer para todos los lados.
+
