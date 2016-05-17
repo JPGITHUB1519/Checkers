@@ -571,10 +571,8 @@ class Partida() :
 			return True
 
 		return False
-		
-	def select_piece(self, juego, i, j) :
 
-		if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+	def select_piece(self, juego, i, j) :
 
 			juego.seleccionado = True
 			juego.factual = i

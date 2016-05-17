@@ -62,9 +62,6 @@ def main() :
 											juego.game_data_structure = juego.aux_game_data_structure
 											juego.comer_data_structure = juego.aux_comer_data_structure
 
-										#print juego.game_data_structure
-										#print juego.comer_data_structure
-										
 										# si hay alguna pieza que le toca comer multiple
 										if juego.cond_comer_multiple == True :
 											# si la pieza seleccionada es la que tiene que comer
@@ -72,7 +69,8 @@ def main() :
 
 												if juego.seleccionado == False :
 
-													juego.partida.select_piece(juego, i, j)
+													if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+														juego.partida.select_piece(juego, i, j)
 													continue 
 
 										if juego.cond_comer_multiple == False :
@@ -83,8 +81,9 @@ def main() :
 
 													if juego.seleccionado == False :
 
+														if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 															juego.partida.select_piece(juego, i, j)
-															continue 
+														continue 
 
 											# si no tiene que comer juega normal
 											else : 
@@ -93,14 +92,14 @@ def main() :
 
 													if juego.seleccionado == False :
 
-														juego.partida.select_piece(juego, i, j)
+														if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+															juego.partida.select_piece(juego, i, j)
 														continue 
 
 									# to see if click a piece no has movement
 									# clickeo en un cuadro vacio?
 									if juego.tablero.squares[i][j].piece.piece_type == 0 :
-									#if len(juego.game_data_structure[str(i) + str(j)]) == 0 :
-
+							
 										if juego.seleccionado == True :
 
 											#print juego.game_data_structure
@@ -148,7 +147,6 @@ def main() :
 																
 																# deshighlight
 																juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
-
 
 																break
 
@@ -199,18 +197,9 @@ def main() :
 
 												if str(i) + str(j) in juego.comer_data_structure  :
 
-													# if clicked a valid piece assign it as selected
-													juego.seleccionado = True
-													# deshighlight the previous piece movement
-													juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
-													juego.factual, juego.cactual = i, j
-													juego.dic_elemento = str(i) + str(j)
-
-													# highlight
-													if len(juego.game_data_structure[(str(i) + str(j))]) > 0 :
-
-															juego.partida.highlight_movement(juego.tablero.squares, juego.game_data_structure, i, j, juego.turno)
-
+													if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+														juego.partida.select_piece(juego, i, j)
+													
 											else :
 												juego.seleccionado = True
 												# deshighlight the previous piece movement
@@ -221,7 +210,7 @@ def main() :
 												# highlight
 												if len(juego.game_data_structure[(str(i) + str(j))]) > 0 :
 
-														juego.partida.highlight_movement(juego.tablero.squares, juego.game_data_structure, i, j, juego.turno)
+													juego.partida.highlight_movement(juego.tablero.squares, juego.game_data_structure, i, j, juego.turno)
 				"""
 				juego.end_of_game = True
 				juego.player1_score = 0
