@@ -571,3 +571,18 @@ class Partida() :
 			return True
 
 		return False
+		
+	def select_piece(self, juego, i, j) :
+
+		if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+
+			juego.seleccionado = True
+			juego.factual = i
+			juego.cactual = j
+			juego.dic_elemento = str(i) + str(j)
+
+			# highlight
+			if len(juego.game_data_structure[(str(i) + str(j))]) > 0 :
+
+				juego.partida.highlight_movement(juego.tablero.squares, juego.game_data_structure, i, j, juego.turno)
+
