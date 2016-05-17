@@ -53,6 +53,10 @@ class Game() :
 		# f , c, cantidad
 		self.comidas = [None,None,0]
 
+		# Scores
+
+		self.player1_score = self.partida.get_score(self.tablero.squares, 1)
+		self.player2_score = self.partida.get_score(self.tablero.squares, 2)
 
 		"""
 		self.game_data_structure = [[0,2,0,2,0,2,0,2],
@@ -68,6 +72,7 @@ class Game() :
 		self.cond_main_game = False
 		self.cond_menu = True
 
+
 		# imagenes
 		self.fondo_menu = pygame.image.load("images/fondo_menu.png")
 		self.fondo_title = pygame.image.load("images/title.png")
@@ -80,6 +85,7 @@ class Game() :
 		self.imagen_boton_salir = pygame.image.load("images/salir.png")
 		self.imagen_boton_salir_hover = pygame.image.load("images/salir_hover.png")
 		
+		self.imagen_winner = pygame.image.load("images/winner.png")
 		# botones
 		self.boton_jugar = boton.Boton(self.imagen_boton_jugar, self.imagen_boton_jugar_hover, 200,500)
 		self.boton_salir = boton.Boton(self.imagen_boton_salir, self.imagen_boton_salir_hover, 400,500)
@@ -88,18 +94,28 @@ class Game() :
 
 		self.font_orena = pygame.font.Font("fonts/Orena.ttf",30)
 		self.font_arial = pygame.font.SysFont("Arial", 30)
+		self.font_tenderness = pygame.font.Font("fonts/Atarian.ttf", 50)
+		
 
 		# Text
 		self.text_credits = self.font_orena.render("Game Created By Jean Urenia", 0, (255,69,0))
-		self.text_turn = self.font_arial.render("Turno :",0,(0,0,0))
+		self.text_turn = self.font_tenderness.render("Turno :",0,(0,0,255))
+		self.text_winner_letter = self.font_arial.render("Winner : ",0,(255,250,205))
+		self.text_winner = None
 		self.text_jugador = None
+
 		# sounds and sounds_conds
 
 		self.cond_music_title = False
 		self.cond_music_background = False
 		self.cond_sound_move_piece = False
+		self.cond_sound_winner = False
 		self.sound_move_piece = pygame.mixer.Sound("music/move_piece.wav")
+		self.sound_winner = pygame.mixer.Sound("music/winner.wav")
 		self.main_channel = pygame.mixer.Channel(0)
+
+		# end of game flag
+		self.end_of_game = False
 
 
 	def main_game(self) :
@@ -113,6 +129,8 @@ class Game() :
 
 		self.tablero.draw_pieces(self.pantalla)
 
+		self.player1_score = self.partida.get_score(self.tablero.squares, 1)
+		self.player2_score = self.partida.get_score(self.tablero.squares, 2)
 		"""
 		if self.cond_music_background == False :
 			pygame.mixer.music.stop()
@@ -120,24 +138,58 @@ class Game() :
 			pygame.mixer.music.play(-1)
 			self.cond_music_background = True 
 		"""
+		if self.end_of_game != True :
+			if self.turno == 1 :
 
+				self.text_jugador = self.font_tenderness .render("Player 1",0,(0,0,0))
+				self.pantalla.blit(self.imagen_pieza_roja,(735,350))
+			else :
 
-		if self.turno == 1 :
+				self.text_jugador = self.font_tenderness .render("Player 2",0,(0,0,0))
+				self.pantalla.blit(self.imagen_pieza_negra,(735,350))
 
-			self.text_jugador = self.font_arial.render("Jugador 1",0,(0,0,0))
-			self.pantalla.blit(self.imagen_pieza_roja,(735,350))
-		else :
+			self.pantalla.blit(self.text_turn, (715,240))
 
-			self.text_jugador = self.font_arial.render("Jugador 2",0,(0,0,0))
-			self.pantalla.blit(self.imagen_pieza_negra,(735,350))
-		self.pantalla.blit(self.text_turn, (715,250))
-		self.pantalla.blit(self.text_jugador, (700,300))
+			
+			self.pantalla.blit(self.text_jugador, (700,300))
+
+		# if the game ends show the winner
+
+		if self.end_of_game == True :
+
+			if self.player1_score == 0 :
+
+				self.text_winner = self.font_tenderness.render("Player 2",0,(139,0,139))
+				self.pantalla.blit(self.imagen_pieza_negra,(740,475))
+			
+			if self.player2_score == 0 :
+
+				self.text_winner = self.font_tenderness.render("Player 1",0,(139,0,139))
+				self.pantalla.blit(self.imagen_pieza_roja,(740,475))
+			
+			self.pantalla.blit(self.imagen_winner,(650,150))
+			self.pantalla.blit(self.text_winner, (715,400))
+
+			if self.cond_sound_winner == False :
+
+				self.main_channel.play(self.sound_winner)
+				self.cond_sound_winner = True
 
 		# initialize sounds
 
 		self.cond_music_title = False
 		self.cond_music_background = False
 		self.cond_sound_move_piece = False
+
+		# check end of game
+
+		if self.partida.end_game(self.player1_score) == True :
+
+			self.end_of_game = True
+
+		elif self.partida.end_game(self.player2_score) == True :
+
+			self.end_of_game = True
 
 	def menu(self) :
 

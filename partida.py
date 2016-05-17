@@ -56,7 +56,6 @@ class Partida() :
 
 		# kings capturing 
 		if squares[f_actual][c_actual].piece.piece_type == 11 or squares[f_actual][c_actual].piece.piece_type == 22 :
-			print "the Bruce Lee"
 			# capture left diagonal UP
 			if c_actual - c_prox == 2 and f_actual - f_prox == 2 :
 
@@ -531,6 +530,37 @@ class Partida() :
 			if squares[aux[0]][aux[1]].piece.piece_type == 0 :
 				squares[aux[0]][aux[1]].piece.image = squares[aux[0]][aux[1]].piece.imagen_transparente
 			aux = []
+
+	def get_score(self, squares, player) :
+
+		score = 0
+
+		for i in range(0,8) :
+
+			for j in range (0,8) :
+
+				if player == self.convert_to_turn(squares[i][j].piece.piece_type) :
+
+					if squares[i][j].piece.piece_type == 1 or squares[i][j].piece.piece_type == 2:
+
+						score += 1
+
+					if squares[i][j].piece.piece_type == 11 or squares[i][j].piece.piece_type == 22:
+
+						score += 3
+		return score
+
+	def end_game(self, puntacion) :
+
+		if puntacion == 0 :
+
+			return True
+
+		return False
+
+
+
+		
 
 
 
