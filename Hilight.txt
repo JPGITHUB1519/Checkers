@@ -1,0 +1,9 @@
+self.tablero.squares[0][0].piece.image = self.tablero.squares[0][0].piece.imagen_highlight
+self.tablero.squares[0][0].piece.rect.left = self.tablero.squares[0][0].piece.rect.left - 1
+self.tablero.squares[0][0].piece.rect.top = self.tablero.squares[0][0].piece.rect.top - 1
+
+Cuando demos click en la pieza 
+
+	Resaltar Los cuadros que corresponden a los movimientos pieza
+
+Cuando terminemos volver todo a la normalidad

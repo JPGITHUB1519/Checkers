@@ -125,13 +125,13 @@ class Game() :
 		if self.turno == 1 :
 
 			self.text_jugador = self.font_arial.render("Jugador 1",0,(0,0,0))
-			self.pantalla.blit(self.imagen_pieza_roja,(750,200))
+			self.pantalla.blit(self.imagen_pieza_roja,(735,350))
 		else :
 
 			self.text_jugador = self.font_arial.render("Jugador 2",0,(0,0,0))
-			self.pantalla.blit(self.imagen_pieza_negra,(750,200))
-		self.pantalla.blit(self.text_turn, (700,100))
-		self.pantalla.blit(self.text_jugador, (700,150))
+			self.pantalla.blit(self.imagen_pieza_negra,(735,350))
+		self.pantalla.blit(self.text_turn, (715,250))
+		self.pantalla.blit(self.text_jugador, (700,300))
 
 		# initialize sounds
 

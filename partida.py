@@ -491,6 +491,51 @@ class Partida() :
 
 			return 2
 
+	def highlight_movement(self, squares, game_data_structure, i, j, turno) :
+
+		aux = []
+
+		for x in range(1,len(game_data_structure[str(i) + str(j)])) :
+
+			for y in range(0, len(game_data_structure[str(i) + str(j)][x])) :
+
+				aux.append(game_data_structure[str(i) + str(j)][x][y])
+
+			if squares[aux[0]][aux[1]].piece.piece_type == 0 :
+				squares[aux[0]][aux[1]].piece.image = squares[aux[0]][aux[1]].piece.imagen_highlight_none
+
+			if squares[aux[0]][aux[1]].piece.piece_type == 1 :
+				squares[aux[0]][aux[1]].piece.image = squares[aux[0]][aux[1]].piece.imagen_highlight_red
+
+			if squares[aux[0]][aux[1]].piece.piece_type == 2 :
+				squares[aux[0]][aux[1]].piece.image = squares[aux[0]][aux[1]].piece.imagen_highlight_black
+
+			if squares[aux[0]][aux[1]].piece.piece_type == 11 :
+				squares[aux[0]][aux[1]].piece.image = squares[aux[0]][aux[1]].piece.imagen_highlight_red_king
+
+			if squares[aux[0]][aux[1]].piece.piece_type == 22 :
+				squares[aux[0]][aux[1]].piece.image = squares[aux[0]][aux[1]].piece.imagen_highlight_black_king
+			
+			aux = []
+
+	def deshighlight_movement(self, squares, game_data_structure, i, j, turno) :
+
+		aux = []
+
+		for x in range(1,len(game_data_structure[str(i) + str(j)])) :
+
+			for y in range(0, len(game_data_structure[str(i) + str(j)][x])) :
+
+				aux.append(game_data_structure[str(i) + str(j)][x][y])
+
+			if squares[aux[0]][aux[1]].piece.piece_type == 0 :
+				squares[aux[0]][aux[1]].piece.image = squares[aux[0]][aux[1]].piece.imagen_transparente
+			aux = []
+
+
+
+
+
 
 
 

@@ -110,7 +110,7 @@ class Board() :
 
 	def assign_positions(self,fila,columna,pantalla, occupation) :
 		""" Asign The Piece and The ocupation to a Square"""
-		self.squares[fila][columna].piece = piece.Piece(occupation, self.squares[fila][columna].left + 10 , self.squares[fila][columna].top + 10)
+		self.squares[fila][columna].piece = piece.Piece(occupation, self.squares[fila][columna].left , self.squares[fila][columna].top )
 		self.squares[fila][columna].occupation = occupation
 
 	def draw_pieces(self,pantalla) :

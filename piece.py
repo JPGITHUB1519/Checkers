@@ -9,7 +9,12 @@ class Piece(pygame.sprite.Sprite) :
 		self.imagen_pieza_king1 = pygame.image.load("images/king_red_piece.png")
 		self.imagen_pieza_king2 = pygame.image.load("images/king_black_piece.png")
 		self.imagen_transparente = pygame.image.load("images/fondo_transparente.png")
-		self.imagen_highlight = pygame.image.load("images/azul_blanco.png")
+		self.imagen_highlight_none = pygame.image.load("images/azul_blanco.png")
+		self.imagen_highlight_red = pygame.image.load("images/azul_blanco_red.png")
+		self.imagen_highlight_black = pygame.image.load("images/azul_blanco_black.png")
+		self.imagen_highlight_red_king = pygame.image.load("images/azul_blanco_red_king.png")
+		self.imagen_highlight_black_king = pygame.image.load("images/azul_blanco_black_king.png")
+
 		self.piece_type = piece_type
 
 
