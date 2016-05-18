@@ -61,7 +61,7 @@ def main() :
 
 											juego.game_data_structure = juego.aux_game_data_structure
 											juego.comer_data_structure = juego.aux_comer_data_structure
-
+										print juego.game_data_structure["52"]
 										# si hay alguna pieza que le toca comer multiple
 										if juego.cond_comer_multiple == True :
 											# si la pieza seleccionada es la que tiene que comer

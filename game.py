@@ -69,8 +69,8 @@ class Game() :
 									[1,0,1,0,1,0,1,0]],
 		"""
 		#conds
-		self.cond_main_game = False
-		self.cond_menu = True
+		self.cond_main_game = True
+		self.cond_menu = False
 
 
 		# imagenes

@@ -390,6 +390,7 @@ class Partida() :
 
 							data_structure[element_name].append([f + 1, c - 1])
 				
+				"""
 				# check kings movement
 				if squares[f][c].piece.piece_type  == 11 or squares[f][c].piece.piece_type == 22 :
 					# check right diagonal up
@@ -415,6 +416,75 @@ class Partida() :
 						if self.check_movement(squares, f,c, f + 1, c - 1) == True :
 
 							data_structure[element_name].append([f + 1, c - 1])
+				"""
+
+				if squares[f][c].piece.piece_type  == 11 or squares[f][c].piece.piece_type == 22 :
+					data_structure[element_name].append(False)
+
+					aux_f = f - 1
+					aux_c = c - 1
+
+					# left up diagonal
+					while (aux_c >= 0 and aux_c <= 7) and(aux_f >= 0 and aux_f <= 7) :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == False :
+
+							data_structure[element_name].append([aux_f, aux_c])
+
+						else :
+
+							break
+
+						aux_f = aux_f - 1
+						aux_c = aux_c - 1
+
+					aux_f = f - 1
+					aux_c = c + 1
+					# right up diagonal
+					while (aux_c >= 0 and aux_c <= 7) and (aux_f >= 0 and aux_f <= 7) :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == False :
+
+							data_structure[element_name].append([aux_f, aux_c])
+						else :
+
+							break
+
+						aux_f = aux_f - 1
+						aux_c = aux_c + 1
+
+					aux_f = f + 1 
+					aux_c = c - 1
+
+					# left down diagonal
+					while (aux_c >= 0 and aux_c <= 7) and (aux_f >= 0 and aux_f <= 7) :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == False :
+
+							data_structure[element_name].append([aux_f, aux_c])
+						else :
+
+							break
+
+						aux_f = aux_f + 1
+						aux_c = aux_c - 1
+
+					aux_f = f + 1
+					aux_c = c + 1
+					
+					# right down diagonal
+					while (aux_c >= 0 and aux_c <= 7) and (aux_f >= 0 and aux_f <= 7) :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == False :
+
+							data_structure[element_name].append([aux_f, aux_c])
+						else :
+
+							break
+
+						aux_f = aux_f + 1
+						aux_c = aux_c + 1
+
 
 		return data_structure
 
