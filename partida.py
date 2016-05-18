@@ -55,8 +55,8 @@ class Partida() :
 					squares[f_actual + 1][c_actual + 1].occupation = 0
 					squares[f_actual + 1][c_actual + 1].piece.piece_type = 0
 
-		# kings capturing 
-		if squares[f_actual][c_actual].piece.piece_type == 11 or squares[f_actual][c_actual].piece.piece_type == 22 or (squares[f_actual][c_actual].piece.piece_type == 1 and eat_multiple == True) or(squares[f_actual][c_actual].piece.piece_type == 2 and eat_multiple == True) :
+		# piece like kings capturing 
+		if (squares[f_actual][c_actual].piece.piece_type == 1 and eat_multiple == True) or(squares[f_actual][c_actual].piece.piece_type == 2 and eat_multiple == True) :
 			# capture left diagonal UP
 			if c_actual - c_prox == 2 and f_actual - f_prox == 2 :
 
@@ -83,6 +83,36 @@ class Partida() :
 				squares[f_actual + 1][c_actual + 1].occupation = 0
 				squares[f_actual + 1][c_actual + 1].piece.piece_type = 0
 		
+		#kings capturing 
+		if squares[f_actual][c_actual].piece.piece_type == 11 or squares[f_actual][c_actual].piece.piece_type == 22 :
+			
+			# diagonal arriba izquierda
+			if c_actual > c_prox and f_actual > f_prox :
+
+				squares[f_prox + 1][c_prox + 1].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
+				squares[f_prox + 1][c_prox + 1].occupation = 0
+				squares[f_prox + 1][c_prox + 1].piece.piece_type = 0
+
+			# diagonal arriba derecha
+			if c_actual < c_prox and f_actual > f_prox :
+
+				squares[f_prox + 1][c_prox - 1].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
+				squares[f_prox + 1][c_prox - 1].occupation = 0
+				squares[f_prox + 1][c_prox - 1].piece.piece_type = 0
+
+			# diagonal abajo izquierda
+			if c_actual > c_prox and f_actual < f_prox :
+
+				squares[f_prox - 1][c_prox + 1].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
+				squares[f_prox - 1][c_prox + 1].occupation = 0
+				squares[f_prox - 1][c_prox + 1].piece.piece_type = 0
+			
+			# diagonal abajo Derecha
+			if c_actual < c_prox and f_actual < f_prox :
+
+				squares[f_prox - 1][c_prox - 1].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
+				squares[f_prox - 1][c_prox - 1].occupation = 0
+				squares[f_prox - 1][c_prox - 1].piece.piece_type = 0
 		# reset captured piece	
 		squares[f_prox][c_prox].piece.image = squares[f_actual][c_actual].piece.image
 		squares[f_actual][c_actual].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
@@ -240,6 +270,7 @@ class Partida() :
 							cond = True
 							pos.append([f_actual + 2, c_actual + 2])
 
+		"""
 		# kings player 1
 
 		if squares[f_actual][c_actual].piece.piece_type == 11 or (squares[f_actual][c_actual].piece.piece_type == 1 and eat_multiple == True)  :
@@ -325,6 +356,272 @@ class Partida() :
 
 						cond = True
 						pos.append([f_actual + 2, c_actual + 2])
+		"""
+
+		if squares[f_actual][c_actual].piece.piece_type == 11 :
+
+			# si hay una pieza en la diagonal izquierda arriba y esa pieza es del jugador 1
+	
+				# left up diagonal
+				cond = False 
+
+				if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+
+					if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and (squares[f_actual - 1][c_actual - 1].piece.piece_type == 2 or squares[f_actual - 1][c_actual - 1].piece.piece_type == 22) :
+						
+						if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
+							
+							cond = True
+							pos.append([f_actual - 2, c_actual - 2])
+
+				if cond == False :
+					aux_f = f_actual - 1
+					aux_c = c_actual - 1
+
+					# one plus than the condition in the comment
+					while (aux_c >= 1 and aux_c <= 7) and (aux_f >= 1 and aux_f <= 7) :
+						
+						#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 2 or squares[aux_f][aux_c].piece.piece_type == 22) :
+							
+							if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
+								
+								if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
+									cond = True
+									pos.append([aux_f - 1, aux_c - 1])
+									break
+						aux_f = aux_f - 1
+						aux_c = aux_c - 1
+
+
+				cond = False
+				if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
+				
+					if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and (squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 2 or squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 22) :
+
+						if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
+
+							cond = True
+							pos.append([f_actual - 2, c_actual + 2])
+
+				if cond == False :
+
+					aux_f = f_actual - 1
+					aux_c = c_actual + 1
+
+					while (aux_c >= 0 and aux_c <= 6) and (aux_f >= 1 and aux_f <= 7) :
+						
+						#if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 2 or squares[aux_f][aux_c].piece.piece_type == 22) :
+							
+							if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
+								
+								if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
+									cond = True
+									pos.append([aux_f - 1, aux_c + 1])
+									break
+						aux_f = aux_f - 1
+						aux_c = aux_c + 1
+
+				
+				# Left Down diagonal
+				cond = False
+				if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
+
+					if self.check_is_occupied(squares, f_actual + 1, c_actual - 1) == True and (squares[f_actual + 1][c_actual - 1].piece.piece_type == 2 or squares[f_actual + 1][c_actual - 1].piece.piece_type == 22) :
+						
+						if self.check_is_occupied(squares, f_actual + 2, c_actual - 2) == False :
+							
+							cond = True
+							pos.append([f_actual + 2, c_actual - 2])
+
+				if cond == False :
+					aux_f = f_actual + 1
+					aux_c = c_actual - 1
+
+					while (aux_c >= 1 and aux_c <= 7) and (aux_f >= 0 and aux_f <= 6) :
+						
+						#if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 2 or squares[aux_f][aux_c].piece.piece_type == 22) :
+							
+							if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
+
+								if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
+								
+									cond = True
+									pos.append([aux_f + 1, aux_c - 1])
+									break
+						aux_f = aux_f + 1
+						aux_c = aux_c - 1
+
+				cond = False
+				if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
+
+					if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == 2 or squares[f_actual + 1][c_actual + 1].piece.piece_type == 22):
+					
+						if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
+
+							cond = True
+							pos.append([f_actual + 2, c_actual + 2])
+
+				if cond == False :
+					aux_f = f_actual + 1
+					aux_c = c_actual - 1
+
+					# Right Down diagonal
+					while (aux_c >= 1 and aux_c <= 6) and (aux_f >= 0 and aux_f <= 6) :
+						
+						#if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 2 or squares[aux_f][aux_c].piece.piece_type == 22) :
+							
+							if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
+
+								if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
+									cond = True
+									pos.append([aux_f + 1, aux_c + 1])
+									break
+						aux_f = aux_f + 1
+						aux_c = aux_c + 1
+
+		# kings player 2 
+		if squares[f_actual][c_actual].piece.piece_type == 22 :
+
+			# si hay una pieza en la diagonal izquierda arriba y esa pieza es del jugador 1
+	
+				# left up diagonal
+				cond = False 
+
+			
+
+				if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+
+					if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and (squares[f_actual - 1][c_actual - 1].piece.piece_type == 1 or squares[f_actual - 1][c_actual - 1].piece.piece_type == 11) :
+						
+						if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
+							
+							cond = True
+							pos.append([f_actual - 2, c_actual - 2])
+				
+				if cond == False :
+					aux_f = f_actual - 1
+					aux_c = c_actual - 1
+
+					# one plus than the condition in the comment
+					while (aux_c >= 1 and aux_c <= 7) and (aux_f >= 1 and aux_f <= 7) :
+						
+						#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 1 or squares[aux_f][aux_c].piece.piece_type == 11) :
+							
+							if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
+								
+								if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
+									cond = True
+									pos.append([aux_f - 1, aux_c - 1])
+									break
+
+						aux_f = aux_f - 1
+						aux_c = aux_c - 1
+
+				# Right up diagonal
+				cond = False 
+
+			
+				if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
+				
+					if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and (squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 1 or squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 11) :
+
+						if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
+
+							cond = True
+							pos.append([f_actual - 2, c_actual + 2])
+
+				if cond == False :
+					aux_f = f_actual - 1
+					aux_c = c_actual + 1
+
+					while (aux_c >= 0 and aux_c <= 6) and (aux_f >= 1 and aux_f <= 7) :
+						
+						#if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 1 or squares[aux_f][aux_c].piece.piece_type == 11) :
+							
+							if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
+								
+								if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
+									cond = True
+									pos.append([aux_f - 1, aux_c + 1])
+									break
+						aux_f = aux_f - 1
+						aux_c = aux_c + 1
+
+				# Left Down diagonal
+				cond = False
+		
+				if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
+
+					if self.check_is_occupied(squares, f_actual + 1, c_actual - 1) == True and (squares[f_actual + 1][c_actual - 1].piece.piece_type == 1 or squares[f_actual + 1][c_actual - 1].piece.piece_type == 11) :
+						
+						if self.check_is_occupied(squares, f_actual + 2, c_actual - 2) == False :
+							
+							cond = True
+							pos.append([f_actual + 2, c_actual - 2])
+
+				if cond == False :
+					aux_f = f_actual + 1
+					aux_c = c_actual - 1
+
+					while (aux_c >= 1 and aux_c <= 7) and (aux_f >= 0 and aux_f <= 6) :
+						
+						#if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 1 or squares[aux_f][aux_c].piece.piece_type == 11) :
+							
+							if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
+
+								if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
+								
+									cond = True
+									pos.append([aux_f + 1, aux_c - 1])
+									break
+						aux_f = aux_f + 1
+						aux_c = aux_c - 1
+
+				# Right Down diagonal
+				cond = False
+				if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
+
+					if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == 1 or squares[f_actual + 1][c_actual + 1].piece.piece_type == 11):
+					
+						if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
+
+							cond = True
+							pos.append([f_actual + 2, c_actual + 2])
+				
+				# si no come como la dama inglesa, comer como dama canadiense
+				if cond == False : 
+					aux_f = f_actual + 1
+					aux_c = c_actual + 1
+					
+					while (aux_c >= 1 and aux_c <= 6) and (aux_f >= 0 and aux_f <= 6) :
+						
+						#if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
+
+						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 1 or squares[aux_f][aux_c].piece.piece_type == 11) :
+							
+							if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
+
+								if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
+									cond = True
+									pos.append([aux_f + 1, aux_c + 1])
+									break
+
+						aux_f = aux_f + 1
+						aux_c = aux_c + 1
 
 		return pos
 

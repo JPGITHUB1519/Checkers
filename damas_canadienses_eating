@@ -1,0 +1,54 @@
+Diagonal izquierda  arriba
+
+	revisar si esta vacio la pos prox -> f - 1  c - 1
+
+	revisar si esta vacio la pos anter -> f + 1  c + 1
+
+Diagonal Derecha arriba
+
+	revisar si esta vacio la pos prox -> f - 1  c + 1
+
+	revisar si esta vacio la pos anter -> f + 1  c - 1
+
+
+Diagonal izquierda  abajo
+
+	revisar si esta vacio la pos prox -> f + 1  c - 1
+
+	revisar si esta vacio la pos anter -> f - 1  c + 1
+
+Diagonal Derecha abajo
+
+	revisar si esta vacio la pos prox -> f + 1  c + 1
+
+	revisar si esta vacio la pos anter -> f - 1  c - 1
+
+# Capturing
+
+Diagonal Arriba Izquierda 
+
+	if ca > cp and fa > fp
+
+		intercambio fprox + 1 cprox + 1
+
+Diagonal Arriba Derecha
+
+	if ca < cp and fa > fp
+
+		intercambio fprox + 1 cprox - 1
+
+Diagonal Abajo Izquierda 
+
+	if ca > cp and fa < fp
+
+		intercambio fprox - 1 cprox + 1
+
+Diagonal Abajo Derecha
+
+	if ca < cp and fa < fp
+
+		intercambio fprox - 1 cprox - 1
+
+
+
+
