@@ -123,8 +123,6 @@ class Partida() :
 		squares[f_prox][c_prox].piece.piece_type = squares[f_actual][c_actual].piece.piece_type
 		squares[f_actual][c_actual].piece.piece_type = 0
 
-		
-
 	def check_movement(self,squares, f_actual, c_actual, f_prox, c_prox) :
 
 		""" Checks if a move is a valid Move"""
@@ -212,6 +210,298 @@ class Partida() :
 
 		return False
 
+	def check_can_eat_kings_diagonal(self, squares, f_actual, c_actual, player, enemy_normal, enemy_king, pos) :
+		
+			""" 
+			Return all the eat movement of a specified king piece
+			it modified the pos list
+
+			"""
+			# si hay una pieza en la diagonal izquierda arriba y esa pieza es del jugador 1
+
+			# left up diagonal
+			cond = False 
+		
+			if cond == False :
+				aux_f = f_actual - 1
+				aux_c = c_actual - 1
+
+				if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+
+					if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and (squares[f_actual - 1][c_actual - 1].piece.piece_type == enemy_normal or squares[f_actual - 1][c_actual - 1].piece.piece_type == enemy_king) :
+						
+						if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
+							
+							cond = True
+							pos.append([f_actual - 2, c_actual - 2])
+
+				if cond == False : 
+				# one plus than the condition in the comment
+					while True  :
+
+						# look for if the piece can eat in the diagonal
+						if cond == False :
+							#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+							if (aux_c >= 1 and aux_c <= 7) and (aux_f >= 1 and aux_f <= 7) :
+								
+									if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == enemy_normal or squares[aux_f][aux_c].piece.piece_type == enemy_king) :
+										
+		
+										if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
+											
+											if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
+												cond = True
+												pos.append([aux_f - 1, aux_c - 1])
+												
+							
+							# if did no found anything break
+							else :
+								break
+
+						#if found anything
+						else :
+
+							# look for movement after the piece to eat
+							if aux_f >= 0 and aux_c >= 0 :
+
+								if self.check_is_occupied(squares, aux_f, aux_c) != True :
+
+									pos.append([aux_f, aux_c])
+
+								# if there is a piece break
+								else :
+
+									break
+							# if there is not nothing, break		
+							else :
+								break
+
+						aux_f = aux_f - 1
+						aux_c = aux_c - 1
+
+			# right up diagonal
+			cond = False 
+		
+			if cond == False :
+				aux_f = f_actual - 1
+				aux_c = c_actual + 1
+
+				if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
+			
+					if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and (squares[f_actual - 1 ][c_actual + 1].piece.piece_type == enemy_normal or squares[f_actual - 1 ][c_actual + 1].piece.piece_type == enemy_king) :
+
+						if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
+
+							cond = True
+							pos.append([f_actual - 2, c_actual + 2])
+
+				if cond == False : 
+				# one plus than the condition in the comment
+					while True  :
+
+						# look for if the piece can eat in the diagonal
+						if cond == False :
+							#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+							if  (aux_c >= 0 and aux_c <= 6) and (aux_f >= 1 and aux_f <= 7) :
+								
+									if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == enemy_normal or squares[aux_f][aux_c].piece.piece_type == enemy_king) :
+						
+										if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
+							
+											if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
+												cond = True
+												pos.append([aux_f - 1, aux_c + 1])
+												
+								
+							# if did no found anything break
+							else :
+								break
+
+						#if found anything
+						else :
+
+							# look for movement after the piece to eat
+							if aux_f <= 7 and aux_c <= 7 :
+
+								if self.check_is_occupied(squares, aux_f, aux_c) != True :
+
+									pos.append([aux_f, aux_c])
+
+								# if there is a piece break
+								else :
+
+									break
+							# if there is not nothing, break		
+							else :
+								break
+
+						aux_f = aux_f - 1
+						aux_c = aux_c + 1
+
+			# left down diagonal
+			cond = False 
+		
+			if cond == False :
+				aux_f = f_actual + 1
+				aux_c = c_actual - 1
+
+				if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
+
+					if self.check_is_occupied(squares, f_actual + 1, c_actual - 1) == True and (squares[f_actual + 1][c_actual - 1].piece.piece_type == enemy_normal or squares[f_actual + 1][c_actual - 1].piece.piece_type == enemy_king) :
+						
+						if self.check_is_occupied(squares, f_actual + 2, c_actual - 2) == False :
+							
+							cond = True
+							pos.append([f_actual + 2, c_actual - 2])
+
+
+				if cond == False : 
+				# one plus than the condition in the comment
+					while True  :
+
+						# look for if the piece can eat in the diagonal
+						if cond == False :
+							#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+							if (aux_c >= 1 and aux_c <= 7) and (aux_f >= 0 and aux_f <= 6) :
+								
+									if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == enemy_normal or squares[aux_f][aux_c].piece.piece_type == enemy_king) :
+						
+										if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
+
+											if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
+							
+												cond = True
+												pos.append([aux_f + 1, aux_c - 1])
+								
+							# if did no found anything break
+							else :
+								break
+
+						#if found anything
+						else :
+
+							# look for movement after the piece to eat
+							if aux_f <= 7 and aux_c >= 0 :
+
+								if self.check_is_occupied(squares, aux_f, aux_c) != True :
+
+									pos.append([aux_f, aux_c])
+
+								# if there is a piece break
+								else :
+
+									break
+							# if there is not nothing, break		
+							else :
+								break
+
+						aux_f = aux_f + 1
+						aux_c = aux_c - 1
+
+			# Right down diagonal
+			cond = False 
+		
+			if cond == False :
+				aux_f = f_actual + 1
+				aux_c = c_actual + 1
+				if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
+
+					if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == enemy_normal or squares[f_actual + 1][c_actual + 1].piece.piece_type == enemy_king):
+				
+						if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
+
+							cond = True
+							pos.append([f_actual + 2, c_actual + 2])
+			
+				if cond == False : 
+				# one plus than the condition in the comment
+					while True  :
+
+						# look for if the piece can eat in the diagonal
+						if cond == False :
+							#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+							if (aux_c >= 1 and aux_c <= 6) and (aux_f >= 0 and aux_f <= 6) :
+								
+									if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == enemy_normal or squares[aux_f][aux_c].piece.piece_type == enemy_king) :
+						
+										if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
+
+											if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
+												cond = True
+												pos.append([aux_f + 1, aux_c + 1])
+								
+							# if did no found anything break
+							else :
+								break
+
+						#if found anything
+						else :
+
+							# look for movement after the piece to eat
+							if aux_f <= 7 and aux_c <= 7 :
+
+								if self.check_is_occupied(squares, aux_f, aux_c) != True :
+
+									pos.append([aux_f, aux_c])
+
+								# if there is a piece break
+								else :
+
+									break
+							# if there is not nothing, break		
+							else :
+								break
+
+						aux_f = aux_f + 1
+						aux_c = aux_c + 1
+
+	def check_can_eat_like_king(self, squares, f_actual, c_actual, enemy_normal, enemy_king, pos) :
+
+		""" Return all the eat movement of a specified normal piece 
+			like the americans king when consecutives eating
+			it modified the pos list
+
+		"""
+		# si hay una pieza en la diagonal izquierda arriba y esa pieza es del jugador 2
+		if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
+
+			if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and (squares[f_actual - 1][c_actual - 1].piece.piece_type == enemy_normal or squares[f_actual - 1][c_actual - 1].piece.piece_type == enemy_king) :
+				
+				if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
+					
+					cond = True
+					pos.append([f_actual - 2, c_actual - 2])
+
+		# si hay una pieza en la diagonal derecha arriba y esa pieza es del jugador 2
+		if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
+			
+			if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and (squares[f_actual - 1 ][c_actual + 1].piece.piece_type == enemy_normal or squares[f_actual - 1 ][c_actual + 1].piece.piece_type == enemy_king) :
+
+				if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
+
+					cond = True
+					pos.append([f_actual - 2, c_actual + 2])
+
+		# si hay una pieza en la diagonal izquierda abajo y esa pieza es del jugador 2
+		if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
+
+			if self.check_is_occupied(squares, f_actual + 1, c_actual - 1) == True and (squares[f_actual + 1][c_actual - 1].piece.piece_type == enemy_normal or squares[f_actual + 1][c_actual - 1].piece.piece_type == enemy_king) :
+				
+				if self.check_is_occupied(squares, f_actual + 2, c_actual - 2) == False :
+					
+					cond = True
+					pos.append([f_actual + 2, c_actual - 2])
+
+		# si hay una pieza en la diagonal Derecha abajo y esa pieza es del jugador 2
+		if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
+
+			if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == enemy_normal or squares[f_actual + 1][c_actual + 1].piece.piece_type == enemy_king):
+			
+				if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
+
+					cond = True
+					pos.append([f_actual + 2, c_actual + 2])
+
 	def check_can_eat(self, squares, f_actual, c_actual, eat_multiple = False) :
 
 		""" Returns the position where a piece have to eat 
@@ -270,359 +560,24 @@ class Partida() :
 							cond = True
 							pos.append([f_actual + 2, c_actual + 2])
 
-		"""
+		# if eat_multiple is True eat like americans king
+		else :
+
+			if squares[f_actual][c_actual].piece.piece_type == 1 and eat_multiple == True :
+				self.check_can_eat_like_king(squares, f_actual, c_actual, 2, 22, pos) 
+
+			if squares[f_actual][c_actual].piece.piece_type == 2 and eat_multiple == True :
+				self.check_can_eat_like_king(squares, f_actual, c_actual, 1, 11, pos) 
+
 		# kings player 1
 
-		if squares[f_actual][c_actual].piece.piece_type == 11 or (squares[f_actual][c_actual].piece.piece_type == 1 and eat_multiple == True)  :
-
-			# si hay una pieza en la diagonal izquierda arriba y esa pieza es del jugador 2
-			if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
-
-				if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and (squares[f_actual - 1][c_actual - 1].piece.piece_type == 2 or squares[f_actual - 1][c_actual - 1].piece.piece_type == 22) :
-					
-					if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
-						
-						cond = True
-						pos.append([f_actual - 2, c_actual - 2])
-
-			# si hay una pieza en la diagonal derecha arriba y esa pieza es del jugador 2
-			if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
-				
-				if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and (squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 2 or squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 22) :
-
-					if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
-
-						cond = True
-						pos.append([f_actual - 2, c_actual + 2])
-
-			# si hay una pieza en la diagonal izquierda abajo y esa pieza es del jugador 2
-			if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
-
-				if self.check_is_occupied(squares, f_actual + 1, c_actual - 1) == True and (squares[f_actual + 1][c_actual - 1].piece.piece_type == 2 or squares[f_actual + 1][c_actual - 1].piece.piece_type == 22) :
-					
-					if self.check_is_occupied(squares, f_actual + 2, c_actual - 2) == False :
-						
-						cond = True
-						pos.append([f_actual + 2, c_actual - 2])
-
-			# si hay una pieza en la diagonal Derecha abajo y esa pieza es del jugador 2
-			if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
-
-				if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == 2 or squares[f_actual + 1][c_actual + 1].piece.piece_type == 22):
-				
-					if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
-
-						cond = True
-						pos.append([f_actual + 2, c_actual + 2])
-		# kings player 2
-		if squares[f_actual][c_actual].piece.piece_type == 22 or (squares[f_actual][c_actual].piece.piece_type == 2 and eat_multiple == True):
-
-			# si hay una pieza en la diagonal izquierda arriba y esa pieza es del jugador 1
-			if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
-
-				if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and (squares[f_actual - 1][c_actual - 1].piece.piece_type == 1 or squares[f_actual - 1][c_actual - 1].piece.piece_type == 11) :
-					
-					if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
-						
-						cond = True
-						pos.append([f_actual - 2, c_actual - 2])
-
-			# si hay una pieza en la diagonal derecha arriba y esa pieza es del jugador 1
-			if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
-				
-				if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and (squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 1 or squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 11) :
-
-					if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
-
-						cond = True
-						pos.append([f_actual - 2, c_actual + 2])
-
-			# si hay una pieza en la diagonal izquierda abajo y esa pieza es del jugador 1
-			if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
-
-				if self.check_is_occupied(squares, f_actual + 1, c_actual - 1) == True and (squares[f_actual + 1][c_actual - 1].piece.piece_type == 1 or squares[f_actual + 1][c_actual - 1].piece.piece_type == 11) :
-					
-					if self.check_is_occupied(squares, f_actual + 2, c_actual - 2) == False :
-						
-						cond = True
-						pos.append([f_actual + 2, c_actual - 2])
-
-			# si hay una pieza en la diagonal Derecha abajo y esa pieza es del jugador 1
-			if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
-
-				if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == 1 or squares[f_actual + 1][c_actual + 1].piece.piece_type == 11):
-				
-					if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
-
-						cond = True
-						pos.append([f_actual + 2, c_actual + 2])
-		"""
-
 		if squares[f_actual][c_actual].piece.piece_type == 11 :
-
-			# si hay una pieza en la diagonal izquierda arriba y esa pieza es del jugador 1
-	
-				# left up diagonal
-				cond = False 
-
-				if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
-
-					if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and (squares[f_actual - 1][c_actual - 1].piece.piece_type == 2 or squares[f_actual - 1][c_actual - 1].piece.piece_type == 22) :
-						
-						if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
-							
-							cond = True
-							pos.append([f_actual - 2, c_actual - 2])
-
-				if cond == False :
-					aux_f = f_actual - 1
-					aux_c = c_actual - 1
-
-					# one plus than the condition in the comment
-					while (aux_c >= 1 and aux_c <= 7) and (aux_f >= 1 and aux_f <= 7) :
-						
-						#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
-
-						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 2 or squares[aux_f][aux_c].piece.piece_type == 22) :
-							
-							if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
-								
-								if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
-									cond = True
-									pos.append([aux_f - 1, aux_c - 1])
-									break
-						aux_f = aux_f - 1
-						aux_c = aux_c - 1
-
-
-				cond = False
-				if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
-				
-					if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and (squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 2 or squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 22) :
-
-						if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
-
-							cond = True
-							pos.append([f_actual - 2, c_actual + 2])
-
-				if cond == False :
-
-					aux_f = f_actual - 1
-					aux_c = c_actual + 1
-
-					while (aux_c >= 0 and aux_c <= 6) and (aux_f >= 1 and aux_f <= 7) :
-						
-						#if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
-
-						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 2 or squares[aux_f][aux_c].piece.piece_type == 22) :
-							
-							if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
-								
-								if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
-									cond = True
-									pos.append([aux_f - 1, aux_c + 1])
-									break
-						aux_f = aux_f - 1
-						aux_c = aux_c + 1
-
-				
-				# Left Down diagonal
-				cond = False
-				if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
-
-					if self.check_is_occupied(squares, f_actual + 1, c_actual - 1) == True and (squares[f_actual + 1][c_actual - 1].piece.piece_type == 2 or squares[f_actual + 1][c_actual - 1].piece.piece_type == 22) :
-						
-						if self.check_is_occupied(squares, f_actual + 2, c_actual - 2) == False :
-							
-							cond = True
-							pos.append([f_actual + 2, c_actual - 2])
-
-				if cond == False :
-					aux_f = f_actual + 1
-					aux_c = c_actual - 1
-
-					while (aux_c >= 1 and aux_c <= 7) and (aux_f >= 0 and aux_f <= 6) :
-						
-						#if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
-
-						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 2 or squares[aux_f][aux_c].piece.piece_type == 22) :
-							
-							if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
-
-								if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
-								
-									cond = True
-									pos.append([aux_f + 1, aux_c - 1])
-									break
-						aux_f = aux_f + 1
-						aux_c = aux_c - 1
-
-				cond = False
-				if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
-
-					if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == 2 or squares[f_actual + 1][c_actual + 1].piece.piece_type == 22):
-					
-						if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
-
-							cond = True
-							pos.append([f_actual + 2, c_actual + 2])
-
-				if cond == False :
-					aux_f = f_actual + 1
-					aux_c = c_actual - 1
-
-					# Right Down diagonal
-					while (aux_c >= 1 and aux_c <= 6) and (aux_f >= 0 and aux_f <= 6) :
-						
-						#if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
-
-						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 2 or squares[aux_f][aux_c].piece.piece_type == 22) :
-							
-							if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
-
-								if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
-									cond = True
-									pos.append([aux_f + 1, aux_c + 1])
-									break
-						aux_f = aux_f + 1
-						aux_c = aux_c + 1
-
+			self.check_can_eat_kings_diagonal(squares, f_actual, c_actual, 1, 2, 22, pos)
+		
 		# kings player 2 
 		if squares[f_actual][c_actual].piece.piece_type == 22 :
-
-			# si hay una pieza en la diagonal izquierda arriba y esa pieza es del jugador 1
-	
-				# left up diagonal
-				cond = False 
-
-			
-
-				if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
-
-					if self.check_is_occupied(squares, f_actual -1, c_actual - 1) == True and (squares[f_actual - 1][c_actual - 1].piece.piece_type == 1 or squares[f_actual - 1][c_actual - 1].piece.piece_type == 11) :
-						
-						if self.check_is_occupied(squares, f_actual - 2, c_actual - 2) == False :
-							
-							cond = True
-							pos.append([f_actual - 2, c_actual - 2])
-				
-				if cond == False :
-					aux_f = f_actual - 1
-					aux_c = c_actual - 1
-
-					# one plus than the condition in the comment
-					while (aux_c >= 1 and aux_c <= 7) and (aux_f >= 1 and aux_f <= 7) :
-						
-						#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
-
-						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 1 or squares[aux_f][aux_c].piece.piece_type == 11) :
-							
-							if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
-								
-								if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
-									cond = True
-									pos.append([aux_f - 1, aux_c - 1])
-									break
-
-						aux_f = aux_f - 1
-						aux_c = aux_c - 1
-
-				# Right up diagonal
-				cond = False 
-
-			
-				if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
-				
-					if self.check_is_occupied(squares,f_actual - 1, c_actual + 1) == True and (squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 1 or squares[f_actual - 1 ][c_actual + 1].piece.piece_type == 11) :
-
-						if self.check_is_occupied(squares,f_actual - 2, c_actual + 2) == False :
-
-							cond = True
-							pos.append([f_actual - 2, c_actual + 2])
-
-				if cond == False :
-					aux_f = f_actual - 1
-					aux_c = c_actual + 1
-
-					while (aux_c >= 0 and aux_c <= 6) and (aux_f >= 1 and aux_f <= 7) :
-						
-						#if c_actual != 6 and c_actual != 7 and f_actual != 0 and f_actual != 1 :
-
-						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 1 or squares[aux_f][aux_c].piece.piece_type == 11) :
-							
-							if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
-								
-								if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
-									cond = True
-									pos.append([aux_f - 1, aux_c + 1])
-									break
-						aux_f = aux_f - 1
-						aux_c = aux_c + 1
-
-				# Left Down diagonal
-				cond = False
+			self.check_can_eat_kings_diagonal(squares, f_actual, c_actual, 2, 1, 11, pos)
 		
-				if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
-
-					if self.check_is_occupied(squares, f_actual + 1, c_actual - 1) == True and (squares[f_actual + 1][c_actual - 1].piece.piece_type == 1 or squares[f_actual + 1][c_actual - 1].piece.piece_type == 11) :
-						
-						if self.check_is_occupied(squares, f_actual + 2, c_actual - 2) == False :
-							
-							cond = True
-							pos.append([f_actual + 2, c_actual - 2])
-
-				if cond == False :
-					aux_f = f_actual + 1
-					aux_c = c_actual - 1
-
-					while (aux_c >= 1 and aux_c <= 7) and (aux_f >= 0 and aux_f <= 6) :
-						
-						#if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
-
-						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 1 or squares[aux_f][aux_c].piece.piece_type == 11) :
-							
-							if self.check_is_occupied(squares, aux_f + 1, aux_c - 1) == False :
-
-								if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
-								
-									cond = True
-									pos.append([aux_f + 1, aux_c - 1])
-									break
-						aux_f = aux_f + 1
-						aux_c = aux_c - 1
-
-				# Right Down diagonal
-				cond = False
-				if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
-
-					if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == 1 or squares[f_actual + 1][c_actual + 1].piece.piece_type == 11):
-					
-						if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
-
-							cond = True
-							pos.append([f_actual + 2, c_actual + 2])
-				
-				# si no come como la dama inglesa, comer como dama canadiense
-				if cond == False : 
-					aux_f = f_actual + 1
-					aux_c = c_actual + 1
-					
-					while (aux_c >= 1 and aux_c <= 6) and (aux_f >= 0 and aux_f <= 6) :
-						
-						#if c_actual != 0 and c_actual != 1 and f_actual != 7 and f_actual != 6 :
-
-						if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == 1 or squares[aux_f][aux_c].piece.piece_type == 11) :
-							
-							if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
-
-								if self.check_is_occupied(squares, aux_f - 1, aux_c + 1) == False :
-									cond = True
-									pos.append([aux_f + 1, aux_c + 1])
-									break
-
-						aux_f = aux_f + 1
-						aux_c = aux_c + 1
-
 		return pos
 
 	def check_all_pieces_movement(self, squares, eat_multiple = False) :
