@@ -61,7 +61,7 @@ def main() :
 
 											juego.game_data_structure = juego.aux_game_data_structure
 											juego.comer_data_structure = juego.aux_comer_data_structure
-										print juego.game_data_structure["52"]
+										
 										# si hay alguna pieza que le toca comer multiple
 										if juego.cond_comer_multiple == True :
 											# si la pieza seleccionada es la que tiene que comer
@@ -115,40 +115,43 @@ def main() :
 
 														if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
 
-																# if not take eat multiple eat normal
+															# if not take eat multiple eat normal
 
-																if juego.cond_comer_multiple == False :
-																	juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j)
-																else :
-																	juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j, True)
-																
-																
-																# here ask if the same pieza have to eat again
-																# here i can ask as king
-																juego.aux_game_data_structure = juego.partida.check_all_pieces_movement(juego.tablero.squares, True)
-																juego.aux_comer_data_structure = juego.partida.have_to_eat(juego.aux_game_data_structure, juego.tablero.squares, juego.turno)[1]
+															if juego.cond_comer_multiple == False :
+																juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j)
+															else :
+																juego.partida.capture_piece(juego.tablero.squares, juego.factual, juego.cactual, i, j, True)
+															
+															# check if after eating the piece become king
+															juego.partida.check_can_become_king(juego.turno, juego.tablero.squares, i, j)
+											   				
 											
-																# ver si la pieza actual puede capturar
-																juego.cond_comer_multiple = juego.partida.piece_have_to_eat(juego.aux_comer_data_structure,juego.tablero.squares,i,j)[0]
-																juego.f_comer_multiple = i
-																juego.c_comer_multiple = j
-																
-																#if have to eat again cannot change of turn
-																if juego.cond_comer_multiple == True :
+															# here ask if the same pieza have to eat again
+															# here i can ask as king
+															juego.aux_game_data_structure = juego.partida.check_all_pieces_movement(juego.tablero.squares, True)
+															juego.aux_comer_data_structure = juego.partida.have_to_eat(juego.aux_game_data_structure, juego.tablero.squares, juego.turno)[1]
+										
+															# ver si la pieza actual puede capturar
+															juego.cond_comer_multiple = juego.partida.piece_have_to_eat(juego.aux_comer_data_structure,juego.tablero.squares,i,j)[0]
+															juego.f_comer_multiple = i
+															juego.c_comer_multiple = j
+															
+															#if have to eat again cannot change of turn
+															if juego.cond_comer_multiple == True :
 
-																	juego.cond_play_well = False
+																juego.cond_play_well = False
 
-																else :
+															else :
 
-																	juego.cond_play_well = True
-		  														
-		  														# play sound
-		  														juego.play_sound(juego.main_channel, juego.sound_move_piece, juego.cond_sound_move_piece)
-																
-																# deshighlight
-																juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
+																juego.cond_play_well = True
+	  														
+	  														# play sound
+	  														juego.play_sound(juego.main_channel, juego.sound_move_piece, juego.cond_sound_move_piece)
+															
+															# deshighlight
+															juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
 
-																break
+															break
 
 													if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :
 														juego.partida.mover(juego.tablero.squares, juego.factual, juego.cactual, i,j, juego.game_data_structure)
@@ -158,19 +161,8 @@ def main() :
 										   				# deshighlight
 														juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
 
-										   	# become the player 1 piece  king
-							   				if juego.tablero.squares[i][j].piece.piece_type == 1 and juego.tablero.squares[i][j].piece.isking == False :
-
-								   				if i == 0 :
-
-								   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
-								   					
-							   				# become the player 2 piece  king
-							   				if juego.tablero.squares[i][j].piece.piece_type == 2 and juego.tablero.squares[i][j].piece.isking == False :
-
-							   					if i == 7 :
-								   					juego.partida.become_king(juego.turno, juego.tablero.squares, i, j)
-
+										   	# become the piece  king
+							   				juego.partida.check_can_become_king(juego.turno, juego.tablero.squares, i, j)
 
 								   			#print juego.tablero.get_string_data_structure() + "\n"
 

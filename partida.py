@@ -528,64 +528,7 @@ class Partida() :
 				aux_f = aux_f + 1
 				aux_c = aux_c + 1
 
-			"""
-			# Right down diagonal
-			cond = False 
-		
-			if cond == False :
-				aux_f = f_actual + 1
-				aux_c = c_actual + 1
-				if c_actual != 6 and c_actual != 7 and  f_actual != 6  and f_actual != 7:
-
-					if self.check_is_occupied(squares, f_actual + 1, c_actual + 1) == True and (squares[f_actual + 1][c_actual + 1].piece.piece_type == enemy_normal or squares[f_actual + 1][c_actual + 1].piece.piece_type == enemy_king):
-				
-						if self.check_is_occupied(squares, f_actual + 2, c_actual + 2) == False :
-
-							cond = True
-							pos.append([f_actual + 2, c_actual + 2])
 			
-				if cond == False : 
-				# one plus than the condition in the comment
-					while True  :
-
-						# look for if the piece can eat in the diagonal
-						if cond == False :
-							#if c_actual != 0 and c_actual != 1 and f_actual != 0 and f_actual != 1 :
-							if (aux_c >= 1 and aux_c <= 6) and (aux_f >= 0 and aux_f <= 6) :
-								
-									if self.check_is_occupied(squares, aux_f, aux_c) == True and (squares[aux_f][aux_c].piece.piece_type == enemy_normal or squares[aux_f][aux_c].piece.piece_type == enemy_king) :
-						
-										if self.check_is_occupied(squares, aux_f + 1, aux_c + 1) == False :
-
-											if self.check_is_occupied(squares, aux_f - 1, aux_c - 1) == False :
-												cond = True
-												pos.append([aux_f + 1, aux_c + 1])
-								
-							# if did no found anything break
-							else :
-								break
-
-						#if found anything
-						else :
-
-							# look for movement after the piece to eat
-							if aux_f <= 7 and aux_c <= 7 :
-
-								if self.check_is_occupied(squares, aux_f, aux_c) != True :
-
-									pos.append([aux_f, aux_c])
-
-								# if there is a piece break
-								else :
-
-									break
-							# if there is not nothing, break		
-							else :
-								break
-
-						aux_f = aux_f + 1
-						aux_c = aux_c + 1
-			"""
 	def check_can_eat_like_king(self, squares, f_actual, c_actual, enemy_normal, enemy_king, pos) :
 
 		""" Return all the eat movement of a specified normal piece 
@@ -744,7 +687,7 @@ class Partida() :
 						data_structure[element_name].append(i)
 					continue
 
-				
+				# player 1
 				if squares[f][c].piece.piece_type  == 1:
 
 					# check right diagonal
@@ -759,6 +702,7 @@ class Partida() :
 
 							data_structure[element_name].append([f - 1, c - 1])
 
+				#player 2
 				if squares[f][c].piece.piece_type  == 2:
 
 					data_structure[element_name].append(False)
@@ -773,34 +717,7 @@ class Partida() :
 
 							data_structure[element_name].append([f + 1, c - 1])
 				
-				"""
-				# check kings movement
-				if squares[f][c].piece.piece_type  == 11 or squares[f][c].piece.piece_type == 22 :
-					# check right diagonal up
-					data_structure[element_name].append(False)
-
-					if c != 7 and f != 0 :
-						if self.check_movement(squares, f, c, f - 1, c + 1) == True :
-
-							data_structure[element_name].append([f - 1, c + 1])
-					
-					if c != 0 and f != 0 :
-						if self.check_movement(squares, f,c, f - 1, c - 1) == True :
-
-							data_structure[element_name].append([f - 1, c - 1])
-
-					if c != 7 and f != 7 :
-						if self.check_movement(squares, f, c, f + 1, c + 1) == True :
-
-							data_structure[element_name].append([f + 1, c + 1])
-
-					if c != 0 and f != 7 :
-
-						if self.check_movement(squares, f,c, f + 1, c - 1) == True :
-
-							data_structure[element_name].append([f + 1, c - 1])
-				"""
-
+				# kings
 				if squares[f][c].piece.piece_type  == 11 or squares[f][c].piece.piece_type == 22 :
 					data_structure[element_name].append(False)
 
@@ -1037,3 +954,16 @@ class Partida() :
 
 				juego.partida.highlight_movement(juego.tablero.squares, juego.game_data_structure, i, j, juego.turno)
 
+	def check_can_become_king(self, turno, squares, i, j) :
+
+		if i == 0 :
+			if squares[i][j].piece.piece_type == 1 and squares[i][j].piece.isking == False :
+
+				self.become_king(turno, squares, i, j)
+		
+		if i == 7 :		
+			# become the player 2 piece  king
+			if squares[i][j].piece.piece_type == 2 and squares[i][j].piece.isking == False :
+
+				
+				self.partida.become_king(turno, squares, i, j)

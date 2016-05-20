@@ -45,7 +45,7 @@ class Board() :
 					else :
 
 						if j % 2 == 0 :
-							self.assign_positions(i,j,pantalla,22)
+							self.assign_positions(i,j,pantalla,2)
 						else :
 							self.assign_positions(i,j,pantalla,0)
 				
