@@ -1,13 +1,9 @@
 to do :
 	
-	kings pieces can eat once
+	Analizar si hay piezas en el medio a la hora de comer
+	Fix Bug when eating multiple with king
+	Fix Bug when there are pieces in king eating
 	
-	highlight pieces movement
-
-doing :
-
-	In multiples eating normal piezas can eat backward
-
 
 
 
