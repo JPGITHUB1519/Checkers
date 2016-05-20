@@ -83,36 +83,80 @@ class Partida() :
 				squares[f_actual + 1][c_actual + 1].occupation = 0
 				squares[f_actual + 1][c_actual + 1].piece.piece_type = 0
 		
+		# kings capturing
+		
 		#kings capturing 
 		if squares[f_actual][c_actual].piece.piece_type == 11 or squares[f_actual][c_actual].piece.piece_type == 22 :
 			
 			# diagonal arriba izquierda
 			if c_actual > c_prox and f_actual > f_prox :
 
-				squares[f_prox + 1][c_prox + 1].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
-				squares[f_prox + 1][c_prox + 1].occupation = 0
-				squares[f_prox + 1][c_prox + 1].piece.piece_type = 0
+				aux_f = f_actual - 1
+				aux_c = c_actual - 1
+
+				# go trought the diagonal if there is a piece(obviosly the enemy) eat it!
+				while True :
+
+					if squares[aux_f][aux_c].piece.piece_type != 0 :
+
+						squares[aux_f][aux_c].piece.image = squares[aux_f][aux_c].piece.imagen_transparente
+						squares[aux_f][aux_c].occupation = 0
+						squares[aux_f][aux_c].piece.piece_type = 0
+						break
+					aux_f = aux_f - 1 
+					aux_c = aux_c - 1  
 
 			# diagonal arriba derecha
 			if c_actual < c_prox and f_actual > f_prox :
 
-				squares[f_prox + 1][c_prox - 1].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
-				squares[f_prox + 1][c_prox - 1].occupation = 0
-				squares[f_prox + 1][c_prox - 1].piece.piece_type = 0
+				aux_f = f_actual - 1
+				aux_c = c_actual + 1
+
+				while True :
+
+					if squares[aux_f][aux_c].piece.piece_type != 0 :
+
+						squares[aux_f][aux_c].piece.image = squares[aux_f][aux_c].piece.imagen_transparente
+						squares[aux_f][aux_c].occupation = 0
+						squares[aux_f][aux_c].piece.piece_type = 0
+						break
+					aux_f = aux_f - 1 
+					aux_c = aux_c + 1  
 
 			# diagonal abajo izquierda
 			if c_actual > c_prox and f_actual < f_prox :
 
-				squares[f_prox - 1][c_prox + 1].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
-				squares[f_prox - 1][c_prox + 1].occupation = 0
-				squares[f_prox - 1][c_prox + 1].piece.piece_type = 0
-			
+				aux_f = f_actual + 1
+				aux_c = c_actual - 1
+
+				while True :
+
+					if squares[aux_f][aux_c].piece.piece_type != 0 :
+
+						squares[aux_f][aux_c].piece.image = squares[aux_f][aux_c].piece.imagen_transparente
+						squares[aux_f][aux_c].occupation = 0
+						squares[aux_f][aux_c].piece.piece_type = 0
+						break
+					aux_f = aux_f + 1 
+					aux_c = aux_c - 1  
+
 			# diagonal abajo Derecha
 			if c_actual < c_prox and f_actual < f_prox :
 
-				squares[f_prox - 1][c_prox - 1].piece.image = squares[f_actual][c_actual].piece.imagen_transparente
-				squares[f_prox - 1][c_prox - 1].occupation = 0
-				squares[f_prox - 1][c_prox - 1].piece.piece_type = 0
+				aux_f = f_actual + 1
+				aux_c = c_actual + 1
+
+				while True :
+
+					if squares[aux_f][aux_c].piece.piece_type != 0 :
+
+						squares[aux_f][aux_c].piece.image = squares[aux_f][aux_c].piece.imagen_transparente
+						squares[aux_f][aux_c].occupation = 0
+						squares[aux_f][aux_c].piece.piece_type = 0
+						break
+					aux_f = aux_f + 1 
+					aux_c = aux_c + 1 
+		
 		# reset captured piece	
 		squares[f_prox][c_prox].piece.image = squares[f_actual][c_actual].piece.image
 		squares[f_actual][c_actual].piece.image = squares[f_actual][c_actual].piece.imagen_transparente

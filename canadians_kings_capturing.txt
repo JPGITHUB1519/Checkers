@@ -1,0 +1,5 @@
+
+# diagonal arriba izquierda
+
+	if c_actual > c_prox and f_actual > f_prox :
+	
