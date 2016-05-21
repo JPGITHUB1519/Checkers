@@ -197,6 +197,7 @@ def main() :
 
 									else :
 
+										# if i change the click a piece that have to eat
 										if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
 
 											if juego.cond_comer == True  :
@@ -204,9 +205,15 @@ def main() :
 												if str(i) + str(j) in juego.comer_data_structure  :
 
 													if juego.turno == juego.partida.convert_to_turn(juego.tablero.squares[i][j].piece.piece_type) :
+														juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
 														juego.partida.select_piece(juego, i, j)
+												else :
+
+													juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
 													
 											else :
+
+												# if i change the click a piece that do not have to eat
 												juego.seleccionado = True
 												# deshighlight the previous piece movement
 												juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
