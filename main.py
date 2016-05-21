@@ -55,6 +55,7 @@ def main() :
 										
 										# save all posibles movements
 										if juego.cond_comer_multiple == False :
+
 											juego.game_data_structure = partida_object.check_all_pieces_movement(juego.tablero.squares)
 											juego.cond_comer, juego.comer_data_structure = juego.partida.have_to_eat(juego.game_data_structure, juego.tablero.squares, juego.turno)
 										else :
@@ -64,6 +65,9 @@ def main() :
 										
 										# si hay alguna pieza que le toca comer multiple
 										if juego.cond_comer_multiple == True :
+											
+											# show message of capturing consecutives
+											juego.multiple_capture_message = True
 											# si la pieza seleccionada es la que tiene que comer
 											if i == juego.f_comer_multiple and j == juego.c_comer_multiple :
 
@@ -75,8 +79,12 @@ def main() :
 
 										if juego.cond_comer_multiple == False :
 											# hay alguna pieza que tenga que comer?
+
 											if juego.cond_comer == True  :
-												
+
+												# show capture Message
+												juego.capture_message = True
+
 												if (str(i) + str(j)) in juego.comer_data_structure :
 
 													if juego.seleccionado == False :
@@ -151,6 +159,12 @@ def main() :
 															# deshighlight
 															juego.partida.deshighlight_movement(juego.tablero.squares, juego.game_data_structure, juego.factual, juego.cactual, juego.turno)
 
+															# quit message
+															if juego.capture_message == True :
+																juego.capture_message = False
+
+															if juego.multiple_capture_message == True :
+																juego.multiple_capture_message = False
 															break
 
 													if juego.game_data_structure[juego.dic_elemento][moves] == [i,j] :

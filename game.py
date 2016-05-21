@@ -103,6 +103,8 @@ class Game() :
 		self.text_winner_letter = self.font_arial.render("Winner : ",0,(255,250,205))
 		self.text_winner = None
 		self.text_jugador = None
+		self.text_capture = self.font_arial.render("YOU MUST CAPTURE", 0, (139,0,139))
+		self.text_multiple_capture = self.font_arial.render("CAPTURE AGAIN!", 0, (139,0,139))
 
 		# sounds and sounds_conds
 
@@ -114,8 +116,12 @@ class Game() :
 		self.sound_winner = pygame.mixer.Sound("music/winner.wav")
 		self.main_channel = pygame.mixer.Channel(0)
 
+		# flags
+
 		# end of game flag
 		self.end_of_game = False
+		self.capture_message = False
+		self.multiple_capture_message = False
 
 
 	def main_game(self) :
@@ -191,6 +197,16 @@ class Game() :
 
 			self.end_of_game = True
 
+		# capture messages
+		if self.capture_message == True :
+
+			self.pantalla.blit(self.text_capture,(635,425))
+
+		if self.multiple_capture_message == True :
+
+			self.pantalla.blit(self.text_multiple_capture,(675,425))
+
+
 	def menu(self) :
 
 		self.cursor1.update(self.pantalla)
@@ -215,6 +231,10 @@ class Game() :
 			channel.play(sound)
 
 		cond = True
+
+
+		
+
 
 
 
