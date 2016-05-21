@@ -966,4 +966,4 @@ class Partida() :
 			if squares[i][j].piece.piece_type == 2 and squares[i][j].piece.isking == False :
 
 				
-				self.partida.become_king(turno, squares, i, j)
+				self.become_king(turno, squares, i, j)
